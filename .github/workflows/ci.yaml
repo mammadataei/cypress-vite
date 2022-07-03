@@ -40,8 +40,11 @@ jobs:
       - name: Lint code
         run: pnpm lint
 
-      - name: Run Tests
-        run: pnpm test
-
       - name: Test Build
         run: pnpm build
+
+      - name: Run Tests
+        uses: cypress-io/github-action@v4
+        with:
+          build: pnpm build
+        run: pnpm test
