@@ -6,6 +6,7 @@ const config: Options = {
   entryPoints: ['src/index.ts'],
   clean: true,
   dts: true,
+  external: ['esbuild', 'vite', 'rollup'],
 }
 
 export default config
