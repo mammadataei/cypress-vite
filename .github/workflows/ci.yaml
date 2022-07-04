@@ -47,4 +47,4 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           build: pnpm build
-        run: pnpm test
+          test: pnpm test
