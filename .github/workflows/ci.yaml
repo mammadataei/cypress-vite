@@ -46,5 +46,6 @@ jobs:
       - name: Run Tests
         uses: cypress-io/github-action@v4
         with:
-          build: pnpm build
-          test: pnpm test
+          install: false
+          command: pnpm test
+          working-directory: example
