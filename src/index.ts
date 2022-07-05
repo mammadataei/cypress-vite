@@ -2,13 +2,18 @@ import path from 'path'
 import { build } from 'vite'
 import type { RollupOutput, RollupWatcher, WatcherOptions } from 'rollup'
 
-type CypressPreprocessor = (
-  file: Cypress.FileObject,
-) => string | Promise<string>
+type FileObject = Cypress.FileObject
+type CypressPreprocessor = (file: FileObject) => string | Promise<string>
+
+const cache: Record<string, string> = {}
 
 export default function vitePreprocessor(): CypressPreprocessor {
   return async (file) => {
     const { outputPath, filePath, shouldWatch } = file
+
+    if (cache[filePath]) {
+      return cache[filePath]
+    }
 
     const fileName = path.basename(outputPath)
     const filenameWithoutExtension = path.basename(
@@ -42,10 +47,12 @@ export default function vitePreprocessor(): CypressPreprocessor {
       })
 
       file.on('close', () => {
+        delete cache[filePath]
         watcher.close()
       })
     }
 
+    cache[filePath] = outputPath
     return outputPath
   }
 }
