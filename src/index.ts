@@ -1,13 +1,18 @@
 import path from 'path'
-import { build } from 'vite'
+import { build, InlineConfig } from 'vite'
 import type { RollupOutput, RollupWatcher, WatcherOptions } from 'rollup'
+import { getConfig, resolveConfig } from './resolveConfig'
 
 type FileObject = Cypress.FileObject
 type CypressPreprocessor = (file: FileObject) => string | Promise<string>
 
 const cache: Record<string, string> = {}
 
-export default function vitePreprocessor(): CypressPreprocessor {
+function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
+  if (userConfigPath) {
+    resolveConfig(userConfigPath)
+  }
+
   return async (file) => {
     const { outputPath, filePath, shouldWatch } = file
 
@@ -21,7 +26,7 @@ export default function vitePreprocessor(): CypressPreprocessor {
       path.extname(outputPath),
     )
 
-    const watcher = await build({
+    const defaultConfig: InlineConfig = {
       logLevel: 'silent',
       build: {
         emptyOutDir: false,
@@ -37,7 +42,9 @@ export default function vitePreprocessor(): CypressPreprocessor {
           name: filenameWithoutExtension,
         },
       },
-    })
+    }
+
+    const watcher = await build(getConfig(defaultConfig))
 
     if (shouldWatch && isWatcher(watcher)) {
       watcher.on('event', (event) => {
@@ -66,3 +73,5 @@ type BuildResult = RollupWatcher | RollupOutput | RollupOutput[]
 function isWatcher(watcher: BuildResult): watcher is RollupWatcher {
   return (watcher as RollupWatcher).on !== undefined
 }
+
+export default vitePreprocessor
