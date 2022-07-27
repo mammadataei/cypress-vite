@@ -4,6 +4,9 @@ import vitePreprocessor from 'cypress-vite-preprocessor'
 
 export default defineConfig({
   e2e: {
+    baseUrl: 'http://localhost:3000/',
+    viewportWidth: 1280,
+    viewportHeight: 768,
     specPattern: '**/*.e2e.ts',
 
     setupNodeEvents(on) {
