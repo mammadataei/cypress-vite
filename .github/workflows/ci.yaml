@@ -43,6 +43,9 @@ jobs:
       - name: Test Build
         run: pnpm build
 
+      - name: Run Example App
+        run: pnpm --filter example dev &
+
       - name: Run Tests
         uses: cypress-io/github-action@v4
         with:
