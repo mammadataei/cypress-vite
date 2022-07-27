@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "cypress": "pnpm --filter example cypress",
+    "example": "pnpm --filter example",
     "test": "pnpm --filter example test",
     "format": "prettier --write . && pnpm lint --fix",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
