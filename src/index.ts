@@ -37,7 +37,7 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
         watch: getWatcherConfig(shouldWatch),
         lib: {
           entry: filePath,
-          fileName,
+          fileName: () => fileName,
           formats: ['es'],
           name: filenameWithoutExtension,
         },
