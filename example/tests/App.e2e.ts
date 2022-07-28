@@ -1,4 +1,4 @@
-export {}
+import type { Todo } from '../src/components/Todos'
 
 beforeEach(() => {
   cy.visit('/')
@@ -29,4 +29,25 @@ it('should remove a todo', () => {
   cy.findByRole('button', { name: 'Remove Buy milk' }).click()
 
   cy.findByRole('checkbox', { name: 'Buy milk' }).should('not.exist')
+})
+
+it('should add multiple todos using fixtures', () => {
+  cy.fixture<Array<Todo>>('todos').then((todos) => {
+    todos.forEach((todo) => {
+      cy.findByRole('textbox', { name: 'Add new todo' }).type(
+        `${todo.title}{enter}`,
+      )
+
+      if (todo.checked) {
+        cy.findByText(todo.title).click()
+        cy.findByRole('checkbox', { name: todo.title })
+          .should('exist')
+          .and('be.checked')
+      } else {
+        cy.findByRole('checkbox', { name: todo.title })
+          .should('exist')
+          .and('not.be.checked')
+      }
+    })
+  })
 })

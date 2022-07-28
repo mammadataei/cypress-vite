@@ -1,0 +1,22 @@
+[
+  {
+    "id": "88e95125-1126-499e-8ea4-6379792ebfaa",
+    "title": "Buy milk",
+    "checked": true
+  },
+  {
+    "id": "1c17ebf6-6fbd-48b1-952b-ad6d1b529c83",
+    "title": "Haircut",
+    "checked": true
+  },
+  {
+    "id": "6a6fc4fa-204d-43da-9564-1aafd765383a",
+    "title": "Clean room",
+    "checked": false
+  },
+  {
+    "id": "1be7041f-2a09-4cfd-98af-c2287ea0dede",
+    "title": "Go to the gym",
+    "checked": true
+  }
+]
