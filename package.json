@@ -1,6 +1,6 @@
 {
-  "name": "cypress-vite-preprocessor",
-  "version": "0.1.0",
+  "name": "cypress-vite",
+  "version": "1.0.0",
   "description": "Run Cypress specs using Vite",
   "author": "Mohammad Ataei",
   "license": "MIT",
