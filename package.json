@@ -12,10 +12,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mammadataei/cypress-vite-preprocessor/"
+    "url": "https://github.com/mammadataei/cypress-vite/"
   },
   "bugs": {
-    "url": "https://github.com/mammadataei/cypress-vite-preprocessor/issues"
+    "url": "https://github.com/mammadataei/cypress-vite/issues"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
