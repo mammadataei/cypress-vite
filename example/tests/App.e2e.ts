@@ -1,4 +1,5 @@
-import type { Todo } from '../src/components/Todos'
+import type { Todo } from '@src/components/Todos'
+import { createTodo } from '@tests/utils/factory'
 
 beforeEach(() => {
   cy.visit('/')
@@ -15,9 +16,9 @@ it('should add a new todo', () => {
 })
 
 it('should add multiple todos', () => {
-  ;['Buy milk', 'Buy eggs', 'Buy bread'].forEach((todo) => {
-    cy.findByRole('textbox', { name: 'Add new todo' }).type(`${todo}{enter}`)
-    cy.findByRole('checkbox', { name: todo }).should('exist')
+  createTodo({ length: 4 }).forEach(({ title }) => {
+    cy.findByRole('textbox', { name: 'Add new todo' }).type(`${title}{enter}`)
+    cy.findByRole('checkbox', { name: title }).should('exist')
   })
 })
 
@@ -38,7 +39,7 @@ it('should add multiple todos using fixtures', () => {
         `${todo.title}{enter}`,
       )
 
-      if (todo.checked) {
+      if (todo.completed) {
         cy.findByText(todo.title).click()
         cy.findByRole('checkbox', { name: todo.title })
           .should('exist')

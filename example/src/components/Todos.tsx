@@ -6,14 +6,14 @@ import { v4 as uuid } from 'uuid'
 export interface Todo {
   id: string
   title: string
-  checked: boolean
+  completed: boolean
 }
 
 export function TodoList() {
   const [todoList, setTodoList] = useState<Array<Todo>>([])
 
   function addTodo(title: Todo['title']) {
-    const todo = { id: uuid(), title, checked: false }
+    const todo: Todo = { id: uuid(), title, completed: false }
     setTodoList([...todoList, todo])
   }
 
@@ -28,7 +28,9 @@ export function TodoList() {
             todo={todo}
             onChange={(checked) => {
               setTodoList(
-                todoList.map((t) => (t.id === todo.id ? { ...t, checked } : t)),
+                todoList.map((t) =>
+                  t.id === todo.id ? { ...t, completed: checked } : t,
+                ),
               )
             }}
             onRemove={() => {

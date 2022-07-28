@@ -38,6 +38,7 @@ importers:
 
   example:
     specifiers:
+      '@ngneat/falso': ^6.0.3
       '@testing-library/cypress': ^8.0.3
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
@@ -59,6 +60,7 @@ importers:
       react-feather: 2.0.10_react@18.2.0
       uuid: 8.3.2
     devDependencies:
+      '@ngneat/falso': 6.0.3
       '@testing-library/cypress': 8.0.3
       '@types/react': 18.0.15
       '@types/react-dom': 18.0.6
@@ -623,6 +625,13 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+    dev: true
+
+  /@ngneat/falso/6.0.3:
+    resolution: {integrity: sha512-FXHlRaAILIOk5h5PH2Fs2WDifbFfPK4ZNe9VrMna6DKOmbOZYczg+ixsY90+ZmnZ4xgEbT3P08Z/CWRIP6gM2w==}
+    dependencies:
+      seedrandom: 3.0.5
+      uuid: 8.3.2
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -3554,6 +3563,10 @@ packages:
     dependencies:
       loose-envify: 1.4.0
     dev: false
+
+  /seedrandom/3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+    dev: true
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}

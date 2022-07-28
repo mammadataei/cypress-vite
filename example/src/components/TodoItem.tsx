@@ -13,7 +13,7 @@ export function TodoItem(props: TodoItemProps) {
   return (
     <div className="w-full flex items-center px-4 py-3 hover:text-slate-800 hover:bg-slate-50">
       <div className="flex flex-grow items-center">
-        {todo.checked ? (
+        {todo.completed ? (
           <CheckCircle className="w-5 h-5 text-sky-500" />
         ) : (
           <Circle className="text-slate-500 w-5 h-5" />
@@ -21,14 +21,14 @@ export function TodoItem(props: TodoItemProps) {
         <input
           id={todo.id}
           type="checkbox"
-          checked={todo.checked}
-          onChange={() => onChange(!todo.checked)}
+          checked={todo.completed}
+          onChange={() => onChange(!todo.completed)}
           className="appearance-none"
         />
         <label
           htmlFor={todo.id}
           className={`ml-3 flex-grow ${
-            todo.checked ? 'line-through text-slate-400' : ''
+            todo.completed ? 'line-through text-slate-400' : ''
           }`}
         >
           {todo.title}

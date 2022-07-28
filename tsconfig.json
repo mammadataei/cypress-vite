@@ -13,6 +13,7 @@
     "noImplicitReturns": true,
     "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "noEmit": true
   },
   "include": ["src", "example"],
