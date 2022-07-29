@@ -17,6 +17,16 @@ that allows you to transform and run Cypress e2e specs using
 - Using vite specific features like plugins and virtual imports, `import.meta`,
   etc. in e2e tests
 
+### What about `@cypress/vite-dev-server`?!
+
+The official `@cypress/vite-dev-server` package is for
+[cypress component testing](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test)
+that creates a vite dev server for mounting and testing React and Vue
+components.
+
+The `cypress-vite` is for compiling and running E2E specs. Neither replaces the
+other, but you can combine them to use vite both for component and E2E testing.
+
 ## Installation
 
 Install the `cypress-vite` plugin:
