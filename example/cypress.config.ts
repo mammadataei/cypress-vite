@@ -8,6 +8,8 @@ export default defineConfig({
     viewportWidth: 1280,
     viewportHeight: 768,
     specPattern: '**/*.e2e.ts',
+    video: false,
+    screenshotOnRunFailure: false,
 
     setupNodeEvents(on) {
       on(
