@@ -28,6 +28,9 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
 
     const defaultConfig: InlineConfig = {
       logLevel: 'silent',
+      define: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      },
       build: {
         emptyOutDir: false,
         minify: false,
@@ -38,7 +41,7 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
         lib: {
           entry: filePath,
           fileName: () => fileName,
-          formats: ['es'],
+          formats: ['umd'],
           name: filenameWithoutExtension,
         },
       },
