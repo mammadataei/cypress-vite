@@ -8,6 +8,18 @@ type CypressPreprocessor = (file: FileObject) => string | Promise<string>
 
 const cache: Record<string, string> = {}
 
+/**
+ * Cypress preprocessor for running e2e tests using vite.
+ *
+ * @param {string} userConfigPath
+ * @example
+ * setupNodeEvents(on) {
+ *   on(
+ *     'file:preprocessor',
+ *     vitePreprocessor(path.resolve(__dirname, './vite.config.ts')),
+ *   )
+ * },
+ */
 function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
   if (userConfigPath) {
     resolveConfig(userConfigPath)
