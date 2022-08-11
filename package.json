@@ -44,7 +44,7 @@
     "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   },
   "peerDependencies": {
-    "vite": "^2.9.0"
+    "vite": "^2.9.0 || ^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
