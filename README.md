@@ -92,6 +92,15 @@ export default defineConfig({
 })
 ```
 
+## Debugging
+
+Run your tests with the following environment variable to log the debugging
+output:
+
+```bash
+DEBUG=cypress-vite
+```
+
 ## Credits
 
 Thanks to
