@@ -1,4 +1,5 @@
 import path from 'path'
+import Debug from 'debug'
 import { build, InlineConfig } from 'vite'
 import type { RollupOutput, RollupWatcher, WatcherOptions } from 'rollup'
 import { getConfig, resolveConfig } from './resolveConfig'
@@ -6,6 +7,7 @@ import { getConfig, resolveConfig } from './resolveConfig'
 type FileObject = Cypress.FileObject
 type CypressPreprocessor = (file: FileObject) => string | Promise<string>
 
+const debug = Debug('cypress-vite')
 const cache: Record<string, string> = {}
 
 /**
@@ -21,14 +23,20 @@ const cache: Record<string, string> = {}
  * },
  */
 function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
+  debug('User config path: %s', userConfigPath)
+
   if (userConfigPath) {
-    resolveConfig(userConfigPath)
+    resolveConfig(userConfigPath).then((config) => {
+      debug('Resolved user config:', config)
+    })
   }
 
   return async (file) => {
     const { outputPath, filePath, shouldWatch } = file
+    debug('Preprocessing file %s', filePath)
 
     if (cache[filePath]) {
+      debug('Cached bundle exist for file %s', filePath)
       return cache[filePath]
     }
 
@@ -59,22 +67,35 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
       },
     }
 
-    const watcher = await build(getConfig(defaultConfig))
+    const buildConfig = getConfig(defaultConfig)
+    debug('Build config for file %s:', filePath, buildConfig)
+
+    const watcher = await build(buildConfig)
 
     if (shouldWatch && isWatcher(watcher)) {
       watcher.on('event', (event) => {
+        debug('Watcher %s for file %s', event.code, filePath)
+
         if (event.code === 'END') {
           file.emit('rerun')
+        }
+
+        if (event.code === 'ERROR') {
+          console.error(event)
         }
       })
 
       file.on('close', () => {
         delete cache[filePath]
         watcher.close()
+
+        debug('File %s closed.', filePath)
       })
     }
 
     cache[filePath] = outputPath
+    debug('Bundle for file %s cached at %s', filePath, outputPath)
+
     return outputPath
   }
 }

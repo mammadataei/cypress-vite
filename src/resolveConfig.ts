@@ -11,8 +11,9 @@ let resolvedUserConfig: UserConfig | undefined = undefined
 const configEnv: ConfigEnv = { command: 'build', mode: 'development' }
 
 export function resolveConfig(userConfigPath: string) {
-  loadConfigFromFile(configEnv, userConfigPath).then((result) => {
+  return loadConfigFromFile(configEnv, userConfigPath).then((result) => {
     resolvedUserConfig = result?.config
+    return resolvedUserConfig
   })
 }
 
