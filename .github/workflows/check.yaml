@@ -85,4 +85,4 @@ jobs:
           install: false
           build: pnpm build
           start: pnpm example dev
-          command: pnpm test
+          command: pnpm example test:ci
