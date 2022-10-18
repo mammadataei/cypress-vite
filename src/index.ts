@@ -2,7 +2,6 @@ import path from 'path'
 import Debug from 'debug'
 import { build, InlineConfig } from 'vite'
 import type { RollupOutput, RollupWatcher, WatcherOptions } from 'rollup'
-import { getConfig, resolveConfig } from './resolveConfig'
 
 type FileObject = Cypress.FileObject
 type CypressPreprocessor = (file: FileObject) => string | Promise<string>
@@ -24,12 +23,6 @@ const cache: Record<string, string> = {}
  */
 function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
   debug('User config path: %s', userConfigPath)
-
-  if (userConfigPath) {
-    resolveConfig(userConfigPath).then((config) => {
-      debug('Resolved user config:', config)
-    })
-  }
 
   return async (file) => {
     const { outputPath, filePath, shouldWatch } = file
@@ -67,10 +60,10 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
       },
     }
 
-    const buildConfig = getConfig(defaultConfig)
-    debug('Build config for file %s:', filePath, buildConfig)
-
-    const watcher = await build(buildConfig)
+    const watcher = await build({
+      configFile: userConfigPath,
+      ...defaultConfig,
+    })
 
     if (shouldWatch && isWatcher(watcher)) {
       watcher.on('event', (event) => {
