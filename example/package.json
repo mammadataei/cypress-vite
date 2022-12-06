@@ -24,7 +24,7 @@
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
-    "cypress": "^10.10.0",
+    "cypress": "^12.0.0",
     "cypress-vite": "workspace:latest",
     "postcss": "^8.4.18",
     "start-server-and-test": "^1.14.0",

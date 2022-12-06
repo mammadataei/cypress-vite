@@ -10,7 +10,7 @@ importers:
       '@types/node': ^18.11.2
       '@typescript-eslint/eslint-plugin': ^5.40.1
       '@typescript-eslint/parser': ^5.40.1
-      cypress: ^10.10.0
+      cypress: ^12.0.0
       debug: ^4.3.4
       eslint: ^8.25.0
       eslint-config-prettier: ^8.5.0
@@ -30,7 +30,7 @@ importers:
       '@types/node': 18.11.2
       '@typescript-eslint/eslint-plugin': 5.40.1_ukgdydjtebaxmxfqp5v5ulh64y
       '@typescript-eslint/parser': 5.40.1_z4bbprzjrhnsfa24uvmcbu7f5q
-      cypress: 10.10.0
+      cypress: 12.0.0
       eslint: 8.25.0
       eslint-config-prettier: 8.5.0_eslint@8.25.0
       husky: 8.0.1
@@ -50,7 +50,7 @@ importers:
       '@types/uuid': ^8.3.4
       '@vitejs/plugin-react': ^2.1.0
       autoprefixer: ^10.4.12
-      cypress: ^10.10.0
+      cypress: ^12.0.0
       cypress-vite: workspace:latest
       postcss: ^8.4.18
       react: ^18.2.0
@@ -68,13 +68,13 @@ importers:
       uuid: 8.3.2
     devDependencies:
       '@ngneat/falso': 6.1.0
-      '@testing-library/cypress': 8.0.3_cypress@10.10.0
+      '@testing-library/cypress': 8.0.3_cypress@12.0.0
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
       '@types/uuid': 8.3.4
       '@vitejs/plugin-react': 2.1.0_vite@3.1.8
       autoprefixer: 10.4.12_postcss@8.4.18
-      cypress: 10.10.0
+      cypress: 12.0.0
       cypress-vite: link:..
       postcss: 8.4.18
       start-server-and-test: 1.14.0
@@ -832,7 +832,7 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     dev: true
 
-  /@testing-library/cypress/8.0.3_cypress@10.10.0:
+  /@testing-library/cypress/8.0.3_cypress@12.0.0:
     resolution: {integrity: sha512-nY2YaSbmuPo5k6kL0iLj/pGPPfka3iwb3kpTx8QN/vOCns92Saz9wfACqB8FJzcR7+lfA4d5HUOWqmTddBzczg==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -840,7 +840,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.19.4
       '@testing-library/dom': 8.19.0
-      cypress: 10.10.0
+      cypress: 12.0.0
     dev: true
 
   /@testing-library/dom/8.19.0:
@@ -1689,9 +1689,9 @@ packages:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: true
 
-  /cypress/10.10.0:
-    resolution: {integrity: sha512-bU8r44x1NIYAUNNXt3CwJpLOVth7HUv2hUhYCxZmgZ1IugowDvuHNpevnoZRQx1KKOEisLvIJW+Xen5Pjn41pg==}
-    engines: {node: '>=12.0.0'}
+  /cypress/12.0.0:
+    resolution: {integrity: sha512-hX/UeaKrL4uiRxJh+eX9t5YFXJconJyqG0hkFkK6CG+4xj2mMmzvJERF3e2h/9TzvLxPAkQ6cGz8eaHfJZeyGg==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
@@ -3884,7 +3884,7 @@ packages:
     dev: false
 
   /proxy-from-env/1.0.0:
-    resolution: {integrity: sha1-M8UDmPcOp+uW0h97gXYwpVeRx+4=}
+    resolution: {integrity: sha512-F2JHgJQ1iqwnHDcQjVBsq3n/uoaFL+iPW/eAeL7kVxy/2RrWaN4WroKjjvbsoRtv0ftelNyC01bjRhn/bhcf4A==}
     dev: true
 
   /ps-tree/1.2.0:
@@ -4694,7 +4694,7 @@ packages:
     dev: true
 
   /verror/1.10.0:
-    resolution: {integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=}
+    resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
     engines: {'0': node >=0.6.0}
     dependencies:
       assert-plus: 1.0.0
