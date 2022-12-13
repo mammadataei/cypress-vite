@@ -44,7 +44,7 @@ importers:
   example:
     specifiers:
       '@ngneat/falso': ^6.1.0
-      '@testing-library/cypress': ^8.0.3
+      '@testing-library/cypress': ^9.0.0
       '@types/react': ^18.0.21
       '@types/react-dom': ^18.0.6
       '@types/uuid': ^8.3.4
@@ -68,7 +68,7 @@ importers:
       uuid: 8.3.2
     devDependencies:
       '@ngneat/falso': 6.1.0
-      '@testing-library/cypress': 8.0.3_cypress@10.10.0
+      '@testing-library/cypress': 9.0.0_cypress@10.10.0
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
       '@types/uuid': 8.3.4
@@ -832,11 +832,11 @@ packages:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     dev: true
 
-  /@testing-library/cypress/8.0.3_cypress@10.10.0:
-    resolution: {integrity: sha512-nY2YaSbmuPo5k6kL0iLj/pGPPfka3iwb3kpTx8QN/vOCns92Saz9wfACqB8FJzcR7+lfA4d5HUOWqmTddBzczg==}
+  /@testing-library/cypress/9.0.0_cypress@10.10.0:
+    resolution: {integrity: sha512-c1XiCGeHGGTWn0LAU12sFUfoX3qfId5gcSE2yHode+vsyHDWraxDPALjVnHd4/Fa3j4KBcc5k++Ccy6A9qnkMA==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
-      cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
+      cypress: ^12.0.0
     dependencies:
       '@babel/runtime': 7.19.4
       '@testing-library/dom': 8.19.0
