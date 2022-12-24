@@ -3,13 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
-const element = document.getElementById('root')
-
-if (element == null) {
-  throw new Error('root element not found')
-}
-
-ReactDOM.createRoot(element).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
