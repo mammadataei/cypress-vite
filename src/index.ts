@@ -60,36 +60,40 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
       },
     }
 
-    const watcher = await build({
-      configFile: userConfigPath,
-      ...defaultConfig,
-    })
-
-    if (shouldWatch && isWatcher(watcher)) {
-      watcher.on('event', (event) => {
-        debug('Watcher %s for file %s', event.code, filePath)
-
-        if (event.code === 'END') {
-          file.emit('rerun')
-        }
-
-        if (event.code === 'ERROR') {
-          console.error(event)
-        }
-      })
-
-      file.on('close', () => {
-        delete cache[filePath]
-        watcher.close()
-
-        debug('File %s closed.', filePath)
-      })
-    }
-
     cache[filePath] = outputPath
     debug('Bundle for file %s cached at %s', filePath, outputPath)
 
-    return outputPath
+    const watcher = (await build({
+      configFile: userConfigPath,
+      ...defaultConfig,
+    })) as BuildResult
+
+    return new Promise((resolve, reject) => {
+      if (shouldWatch && isWatcher(watcher)) {
+        watcher.on('event', (event) => {
+          debug('Watcher %s for file %s', event.code, filePath)
+
+          if (event.code === 'END') {
+            resolve(outputPath)
+            file.emit('rerun')
+          }
+
+          if (event.code === 'ERROR') {
+            console.error(event)
+            reject(new Error(event.error.message))
+          }
+        })
+
+        file.on('close', () => {
+          delete cache[filePath]
+          watcher.close()
+
+          debug('File %s closed.', filePath)
+        })
+      } else {
+        resolve(outputPath)
+      }
+    })
   }
 }
 
@@ -97,7 +101,7 @@ function getWatcherConfig(shouldWatch: boolean): WatcherOptions | null {
   return shouldWatch ? {} : null
 }
 
-type BuildResult = RollupWatcher | RollupOutput | RollupOutput[]
+type BuildResult = RollupOutput | RollupWatcher | RollupOutput[]
 
 function isWatcher(watcher: BuildResult): watcher is RollupWatcher {
   return (watcher as RollupWatcher).on !== undefined
