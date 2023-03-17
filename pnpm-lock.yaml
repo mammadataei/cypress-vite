@@ -61,6 +61,7 @@ importers:
       typescript: ^4.8.4
       uuid: ^9.0.0
       vite: ^4.0.1
+      vite-tsconfig-paths: ^4.0.7
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -81,6 +82,7 @@ importers:
       tailwindcss: 3.1.8_postcss@8.4.18
       typescript: 4.8.4
       vite: 4.0.2
+      vite-tsconfig-paths: 4.0.7_n4ua3lce735nrw64wymnv2djae
 
 packages:
 
@@ -2846,6 +2848,10 @@ packages:
       slash: 4.0.0
     dev: true
 
+  /globrex/0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+    dev: true
+
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
@@ -4552,6 +4558,19 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /tsconfck/2.1.0_typescript@4.8.4:
+    resolution: {integrity: sha512-lztI9ohwclQHISVWrM/hlcgsRpphsii94DV9AQtAw2XJSVNiv+3ppdEsrL5J+xc5oTeHXe1qDqlOAGw8VSa9+Q==}
+    engines: {node: ^14.13.1 || ^16 || >=18}
+    hasBin: true
+    peerDependencies:
+      typescript: ^4.3.5 || ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 4.8.4
+    dev: true
+
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
@@ -4738,6 +4757,23 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: true
+
+  /vite-tsconfig-paths/4.0.7_n4ua3lce735nrw64wymnv2djae:
+    resolution: {integrity: sha512-MwIYaby6kcbQGZqMH+gAK6h0UYQGOkjsuAgw4q6bP/5vWkn8VKvnmLuCQHA2+IzHAJHnE8OFTO4lnJLFMf9+7Q==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+      globrex: 0.1.2
+      tsconfck: 2.1.0_typescript@4.8.4
+      vite: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /vite/4.0.2:
