@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/mammadataei/cypress-vite/compare/v1.3.1...v1.3.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* fix dist bundle ([#47](https://github.com/mammadataei/cypress-vite/issues/47)) ([ea7015a](https://github.com/mammadataei/cypress-vite/commit/ea7015afc33b58e24066ceec6054cea3aa713e40))
+
 ## [1.3.1](https://github.com/mammadataei/cypress-vite/compare/v1.3.0...v1.3.1) (2023-03-02)
 
 
