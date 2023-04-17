@@ -72,8 +72,7 @@ module.exports = (on, config) => {
 
 ### Configuration
 
-You can simply pass the `vitePreprocessor` function the path to your Vite config
-file:
+You can pass a Vite config to the `vitePreprocessor` function:
 
 ```typescript
 import path from 'path'
@@ -85,7 +84,10 @@ export default defineConfig({
     setupNodeEvents(on) {
       on(
         'file:preprocessor',
-        vitePreprocessor(path.resolve(__dirname, './vite.config.ts')),
+        vitePreprocessor({
+          configFile: path.resolve(__dirname, './vite.config.ts'),
+          mode: 'development',
+        }),
       )
     },
   },
