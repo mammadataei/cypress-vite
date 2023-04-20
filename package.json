@@ -65,6 +65,7 @@
     "vite": "^4.0.2"
   },
   "dependencies": {
+    "chokidar": "^3.5.3",
     "debug": "^4.3.4"
   }
 }

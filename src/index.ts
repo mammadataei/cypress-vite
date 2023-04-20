@@ -1,13 +1,13 @@
 import path from 'path'
 import Debug from 'debug'
 import { build, InlineConfig } from 'vite'
-import type { RollupOutput, RollupWatcher, WatcherOptions } from 'rollup'
+import chokidar from 'chokidar'
 
 type FileObject = Cypress.FileObject
-type CypressPreprocessor = (file: FileObject) => string | Promise<string>
+type CypressPreprocessor = (file: FileObject) => Promise<string>
 
 const debug = Debug('cypress-vite')
-const cache: Record<string, string> = {}
+const watchers: Record<string, chokidar.FSWatcher> = {}
 
 /**
  * Cypress preprocessor for running e2e tests using vite.
@@ -28,19 +28,37 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
     const { outputPath, filePath, shouldWatch } = file
     debug('Preprocessing file %s', filePath)
 
-    if (cache[filePath]) {
-      debug('Cached bundle exist for file %s', filePath)
-      return cache[filePath]
-    }
-
     const fileName = path.basename(outputPath)
     const filenameWithoutExtension = path.basename(
       outputPath,
       path.extname(outputPath),
     )
 
+    if (shouldWatch && !watchers[filePath]) {
+      // Watch this spec file if we are not already doing so (and Cypress is
+      // not in headless mode)
+      let initial = true
+      watchers[filePath] = chokidar.watch(filePath)
+      debug('Watcher for file %s cached', filePath)
+
+      file.on('close', async () => {
+        await watchers[filePath].close()
+        delete watchers[filePath]
+
+        debug('File %s closed.', filePath)
+      })
+
+      watchers[filePath].on('all', () => {
+        // Re-run the preprocessor if the file changes
+        if (!initial) {
+          file.emit('rerun')
+        }
+        initial = false
+      })
+    }
+
     const defaultConfig: InlineConfig = {
-      logLevel: 'silent',
+      logLevel: 'warn',
       define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       },
@@ -50,7 +68,7 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
         outDir: path.dirname(outputPath),
         sourcemap: true,
         write: true,
-        watch: getWatcherConfig(shouldWatch),
+        watch: null,
         lib: {
           entry: filePath,
           fileName: () => fileName,
@@ -60,51 +78,13 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
       },
     }
 
-    cache[filePath] = outputPath
-    debug('Bundle for file %s cached at %s', filePath, outputPath)
-
-    const watcher = (await build({
+    await build({
       configFile: userConfigPath,
       ...defaultConfig,
-    })) as BuildResult
-
-    return new Promise((resolve, reject) => {
-      if (shouldWatch && isWatcher(watcher)) {
-        watcher.on('event', (event) => {
-          debug('Watcher %s for file %s', event.code, filePath)
-
-          if (event.code === 'END') {
-            resolve(outputPath)
-            file.emit('rerun')
-          }
-
-          if (event.code === 'ERROR') {
-            console.error(event)
-            reject(new Error(event.error.message))
-          }
-        })
-
-        file.on('close', () => {
-          delete cache[filePath]
-          watcher.close()
-
-          debug('File %s closed.', filePath)
-        })
-      } else {
-        resolve(outputPath)
-      }
     })
+
+    return outputPath
   }
-}
-
-function getWatcherConfig(shouldWatch: boolean): WatcherOptions | null {
-  return shouldWatch ? {} : null
-}
-
-type BuildResult = RollupOutput | RollupWatcher | RollupOutput[]
-
-function isWatcher(watcher: BuildResult): watcher is RollupWatcher {
-  return (watcher as RollupWatcher).on !== undefined
 }
 
 export default vitePreprocessor
