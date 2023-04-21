@@ -12,7 +12,8 @@ const watchers: Record<string, chokidar.FSWatcher> = {}
 /**
  * Cypress preprocessor for running e2e tests using vite.
  *
- * @param {string} userConfigPath
+ * @param {InlineConfig | string} config - Vite config object, or path to user
+ * Vite config file for backwards compatibility
  * @example
  * setupNodeEvents(on) {
  *   on(
@@ -21,8 +22,14 @@ const watchers: Record<string, chokidar.FSWatcher> = {}
  *   )
  * },
  */
-function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
-  debug('User config path: %s', userConfigPath)
+function vitePreprocessor(
+  userConfig?: InlineConfig | string,
+): CypressPreprocessor {
+  const config: InlineConfig =
+    typeof userConfig === 'string'
+      ? { configFile: userConfig }
+      : userConfig ?? {}
+  debug('User config path: %s', config.configFile)
 
   return async (file) => {
     const { outputPath, filePath, shouldWatch } = file
@@ -79,7 +86,7 @@ function vitePreprocessor(userConfigPath?: string): CypressPreprocessor {
     }
 
     await build({
-      configFile: userConfigPath,
+      ...config,
       ...defaultConfig,
     })
 
