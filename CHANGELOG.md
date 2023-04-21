@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/mammadataei/cypress-vite/compare/v1.3.2...v1.4.0) (2023-04-21)
+
+
+### Features
+
+* allow user to specify full Vite config, not just `configFile` ([#53](https://github.com/mammadataei/cypress-vite/issues/53)) ([293684f](https://github.com/mammadataei/cypress-vite/commit/293684fc092692d247564aada08368ff6bf7de05))
+
+
+### Bug Fixes
+
+* use chokidar file watcher instead of Vite/Rollup watch ([#50](https://github.com/mammadataei/cypress-vite/issues/50)) ([a2eec1d](https://github.com/mammadataei/cypress-vite/commit/a2eec1d273cda0aa57eb5300804f42033a7e40dc))
+
 ## [1.3.2](https://github.com/mammadataei/cypress-vite/compare/v1.3.1...v1.3.2) (2023-04-11)
 
 
