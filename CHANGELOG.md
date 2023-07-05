@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/mammadataei/cypress-vite/compare/v1.4.0...v1.4.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* override `rollupOptions.ouput.manualChunks` from the user config ([#58](https://github.com/mammadataei/cypress-vite/issues/58)) ([c38600e](https://github.com/mammadataei/cypress-vite/commit/c38600ec6a56af6e2c614e5532d430f352f3b130))
+
 ## [1.4.0](https://github.com/mammadataei/cypress-vite/compare/v1.3.2...v1.4.0) (2023-04-21)
 
 
