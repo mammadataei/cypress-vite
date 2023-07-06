@@ -20,7 +20,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
           run_install: false
         if: ${{ steps.release.outputs.release_created }}
 
@@ -30,7 +30,8 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
 
       - name: Set pnpm publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+        run:
+          pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
         env:
           NPM_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
