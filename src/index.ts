@@ -84,9 +84,9 @@ function vitePreprocessor(
         },
         rollupOptions: {
           output: {
-            manualChunks: undefined, // override any manualChunks from the user config because they don't work with UMD
-          }
-        }
+            manualChunks: false as any, // override any manualChunks from the user config because they don't work with UMD
+          },
+        },
       },
     }
 
