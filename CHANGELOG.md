@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/mammadataei/cypress-vite/compare/v1.4.1...v1.4.2) (2023-07-15)
+
+
+### Bug Fixes
+
+* override `ouput.manualChunks` using `false` ([#67](https://github.com/mammadataei/cypress-vite/issues/67)) ([145627a](https://github.com/mammadataei/cypress-vite/commit/145627ab09ed9e43089107126b5319d246eb97f2))
+
 ## [1.4.1](https://github.com/mammadataei/cypress-vite/compare/v1.4.0...v1.4.1) (2023-07-05)
 
 
