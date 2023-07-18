@@ -80,8 +80,8 @@ importers:
         version: 9.0.0
     devDependencies:
       '@ngneat/falso':
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@testing-library/cypress':
         specifier: ^9.0.0
         version: 9.0.0(cypress@12.1.0)
@@ -902,8 +902,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@ngneat/falso@6.1.0:
-    resolution: {integrity: sha512-eka5OxW65B1RphpLJ04Pd4PEkrmTab/Ut50K0OceAdM+O+MZA7YF9xo51uZgkxbhg8bJ5zEh5vucDRMSofcqsw==}
+  /@ngneat/falso@7.0.0:
+    resolution: {integrity: sha512-zrGVn1MPgcghdq7sq+u9GUwoNCwjc0GdFC+2n1Pyhm2YluEOl6dnEkBxM614ry56mWo0nrY68Tfb8AgcCI2fqQ==}
     dependencies:
       seedrandom: 3.0.5
       uuid: 8.3.2
