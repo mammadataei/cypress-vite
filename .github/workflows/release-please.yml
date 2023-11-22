@@ -24,7 +24,7 @@ jobs:
           run_install: false
         if: ${{ steps.release.outputs.release_created }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18.x
         if: ${{ steps.release.outputs.release_created }}
