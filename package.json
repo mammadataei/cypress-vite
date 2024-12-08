@@ -47,8 +47,8 @@
     "vite": "^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@types/debug": "^4.1.12",
     "@types/node": "^20.9.3",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
