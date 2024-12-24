@@ -1,6 +1,6 @@
 {
   "name": "cypress-vite",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Run Cypress specs using Vite",
   "author": "Mohammad Ataei",
   "license": "MIT",
@@ -22,9 +22,9 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -44,7 +44,7 @@
     "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   },
   "peerDependencies": {
-    "vite": "^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0"
+    "vite": "^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
@@ -53,18 +53,19 @@
     "@types/node": "^20.9.3",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
-    "cypress": "^13.5.1",
+    "cypress": "^13.16.1",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "prettier": "^3.1.0",
-    "typescript": "^5.3.2",
-    "unbuild": "^2.0.0",
-    "vite": "^5.0.2"
+    "lint-staged": "^15.2.11",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "unbuild": "^3.0.0",
+    "vite": "^6.0.3"
   },
   "dependencies": {
     "chokidar": "^3.5.3",
     "debug": "^4.3.4"
-  }
+  },
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }
