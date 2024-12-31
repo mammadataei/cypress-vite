@@ -66,5 +66,6 @@
   "dependencies": {
     "chokidar": "^3.5.3",
     "debug": "^4.3.4"
-  }
+  },
+  "packageManager": "pnpm@9.15.2"
 }
