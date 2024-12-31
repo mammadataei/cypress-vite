@@ -1,6 +1,6 @@
 {
   "name": "cypress-vite",
-  "version": "1.6.0",
+  "version": "1.5.0",
   "description": "Run Cypress specs using Vite",
   "author": "Mohammad Ataei",
   "license": "MIT",
