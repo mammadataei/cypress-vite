@@ -96,7 +96,8 @@ export default defineConfig({
 
 ### Pre-building before run
 
-Can speed up preprocessing by performing one overall Vite preprocessing build before all specs are ran. (Does not work in watch mode)
+Can speed up preprocessing by performing one overall Vite preprocessing build
+before all specs are ran. (Does not work in watch mode)
 
 ```typescript
 import { getVitePrebuilder } from 'cypress-vite'
@@ -111,7 +112,7 @@ export default defineConfig({
     },
   },
 })
- ```
+```
 
 ## Debugging
 

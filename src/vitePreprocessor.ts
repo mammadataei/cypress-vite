@@ -10,7 +10,7 @@ const watchers: Record<string, chokidar.FSWatcher> = {}
  *
  * @param {InlineConfig | string} config - Vite config object, or path to user
  * Vite config file for backwards compatibility
- * 
+ *
  * @example
  * import vitePreprocessor from 'cypress-vite'
  * ...
