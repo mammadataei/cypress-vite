@@ -41,7 +41,7 @@ pnpm add --save-dev cypress-vite
 
 ## Usage
 
-For Cypress 10, add the following to your `cypress.config.ts` file:
+For Cypress 10+, add the following to your `cypress.config.ts` file:
 
 ```typescript
 import { defineConfig } from 'cypress'
@@ -93,6 +93,25 @@ export default defineConfig({
   },
 })
 ```
+
+### Pre-building before run
+
+Can speed up preprocessing by performing one overall Vite preprocessing build before all specs are ran. (Does not work in watch mode)
+
+```typescript
+import { getVitePrebuilder } from 'cypress-vite'
+
+const { vitePrebuild, vitePreprocessor } = getVitePrebuilder()
+
+export default defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      on('before:run', (details) => vitePrebuild(details, config))
+      on('file:preprocessor', vitePreprocessor)
+    },
+  },
+})
+ ```
 
 ## Debugging
 

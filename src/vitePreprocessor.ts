@@ -1,12 +1,8 @@
 import path from 'path'
-import Debug from 'debug'
-import { build, InlineConfig } from 'vite'
+import { build, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
+import { debug, getConfig, type CypressPreprocessor } from './common'
 
-type FileObject = Cypress.FileObject
-type CypressPreprocessor = (file: FileObject) => Promise<string>
-
-const debug = Debug('cypress-vite')
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
 /**
@@ -14,7 +10,10 @@ const watchers: Record<string, chokidar.FSWatcher> = {}
  *
  * @param {InlineConfig | string} config - Vite config object, or path to user
  * Vite config file for backwards compatibility
+ * 
  * @example
+ * import vitePreprocessor from 'cypress-vite'
+ * ...
  * setupNodeEvents(on) {
  *   on(
  *     'file:preprocessor',
@@ -25,10 +24,7 @@ const watchers: Record<string, chokidar.FSWatcher> = {}
 function vitePreprocessor(
   userConfig?: InlineConfig | string,
 ): CypressPreprocessor {
-  const config: InlineConfig =
-    typeof userConfig === 'string'
-      ? { configFile: userConfig }
-      : userConfig ?? {}
+  const config: InlineConfig = getConfig(userConfig)
   debug('User config path: %s', config.configFile)
 
   return async (file) => {
