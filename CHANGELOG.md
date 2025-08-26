@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/mammadataei/cypress-vite/compare/v1.6.0...v1.7.0) (2025-08-26)
+
+
+### Features
+
+* adding support for Vite 7 ([#116](https://github.com/mammadataei/cypress-vite/issues/116)) ([2ce1705](https://github.com/mammadataei/cypress-vite/commit/2ce1705fd6e513025cde2a6dcfcb63a550a990c7))
+
 ## [1.6.0](https://github.com/mammadataei/cypress-vite/compare/v1.5.0...v1.6.0) (2024-12-31)
 
 
