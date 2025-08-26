@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "cypress": "start-server-and-test dev http://localhost:5173 'cypress open'",
-    "test": "start-server-and-test dev http://localhost:5173 'cypress run'",
-    "test:ci": "cypress run",
+    "cypress-run-all": "cypress run && cypress run --config-file cypress-prebuild.config.ts",
+    "test": "start-server-and-test dev http://localhost:5173 cypress-run-all",
+    "test:ci": "pnpm cypress-run-all",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
