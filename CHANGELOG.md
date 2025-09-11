@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/mammadataei/cypress-vite/compare/v1.7.0...v1.8.0) (2025-09-11)
+
+
+### Features
+
+* Vite prebuild before run ([#114](https://github.com/mammadataei/cypress-vite/issues/114)) ([988c512](https://github.com/mammadataei/cypress-vite/commit/988c5120821b33956fade96de6be20d56464a7fb))
+
+
+### Bug Fixes
+
+* producing incorrect types for commonjs root export ([#120](https://github.com/mammadataei/cypress-vite/issues/120)) ([cee8331](https://github.com/mammadataei/cypress-vite/commit/cee83319ef2bc19ce8b4869170e5ccd486139eb8))
+
 ## [1.7.0](https://github.com/mammadataei/cypress-vite/compare/v1.6.0...v1.7.0) (2025-08-26)
 
 
