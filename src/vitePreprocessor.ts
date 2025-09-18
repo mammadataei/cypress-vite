@@ -1,5 +1,5 @@
 import path from 'path'
-import { build, type InlineConfig } from 'vite'
+import { build, mergeConfig, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 
@@ -60,38 +60,43 @@ function vitePreprocessor(
       })
     }
 
-    const defaultConfig: InlineConfig = {
-      logLevel: 'warn',
-      define: {
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    const resolvedConfig = mergeConfig(
+      {
+        // defaults
+        logLevel: 'warn',
+        // user config
+        ...config,
       },
-      build: {
-        emptyOutDir: false,
-        minify: false,
-        outDir: path.dirname(outputPath),
-        sourcemap: true,
-        write: true,
-        watch: null,
-        lib: {
-          entry: filePath,
-          fileName: () => fileName,
-          formats: ['umd'],
-          name: filenameWithoutExtension,
+      // overrides
+      {
+        define: {
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         },
-        rollupOptions: {
-          output: {
-            // override any manualChunks from the user config because they don't work with UMD
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            manualChunks: false as any,
+        build: {
+          emptyOutDir: false,
+          minify: false,
+          outDir: path.dirname(outputPath),
+          sourcemap: true,
+          write: true,
+          watch: null,
+          lib: {
+            entry: filePath,
+            fileName: () => fileName,
+            formats: ['umd'],
+            name: filenameWithoutExtension,
+          },
+          rollupOptions: {
+            output: {
+              // override any manualChunks from the user config because they don't work with UMD
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              manualChunks: false as any,
+            },
           },
         },
-      },
-    }
+      } satisfies InlineConfig,
+    )
 
-    await build({
-      ...config,
-      ...defaultConfig,
-    })
+    await build(resolvedConfig)
 
     return outputPath
   }
