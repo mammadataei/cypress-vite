@@ -81,8 +81,7 @@ function vitePreprocessor(
         rollupOptions: {
           output: {
             // override any manualChunks from the user config because they don't work with UMD
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            manualChunks: false as any,
+            manualChunks: () => null,
           },
         },
       },
