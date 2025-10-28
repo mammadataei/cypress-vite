@@ -100,10 +100,10 @@ function vitePreprocessor(
       const rollupOutput = resolvedConfig.build.rollupOptions.output
       if (Array.isArray(rollupOutput)) {
         resolvedConfig.build.rollupOptions.output = rollupOutput.map(
-          ({ manualChunks: _, ...rest }) => rest,
+          ({ manualChunks, ...rest }) => rest,
         )
       } else {
-        const { manualChunks: _, ...outputWithoutManualChunks } = rollupOutput
+        const { manualChunks, ...outputWithoutManualChunks } = rollupOutput
         resolvedConfig.build.rollupOptions.output = outputWithoutManualChunks
       }
     }
