@@ -78,20 +78,37 @@ function vitePreprocessor(
           formats: ['umd'],
           name: filenameWithoutExtension,
         },
-        rollupOptions: {
-          output: {
-            // override any manualChunks from the user config because they don't work with UMD
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            manualChunks: false as any,
-          },
-        },
+        // Just delete manualChunks rather than trying to override/merge
+        // rollupOptions: {
+        //   output: {
+        //     manualChunks: undefined ,
+        //   },
+        // },
       },
     }
 
-    await build({
+    const resolvedConfig: InlineConfig = {
       ...config,
       ...defaultConfig,
-    })
+    }
+
+    // Remove any manualChunks.
+    // Have tried various ways of overriding value, but can't find a value that
+    // works with both rollup and rolldown. Straight-up deletion seems to be the
+    // best move here.
+    if (resolvedConfig.build?.rollupOptions?.output) {
+      const rollupOutput = resolvedConfig.build.rollupOptions.output
+      if (Array.isArray(rollupOutput)) {
+        resolvedConfig.build.rollupOptions.output = rollupOutput.map(
+          ({ manualChunks: _, ...rest }) => rest,
+        )
+      } else {
+        const { manualChunks: _, ...outputWithoutManualChunks } = rollupOutput
+        resolvedConfig.build.rollupOptions.output = outputWithoutManualChunks
+      }
+    }
+
+    await build(resolvedConfig)
 
     return outputPath
   }
