@@ -100,11 +100,11 @@ function vitePreprocessor(
       const rollupOutput = resolvedConfig.build.rollupOptions.output
       if (Array.isArray(rollupOutput)) {
         resolvedConfig.build.rollupOptions.output = rollupOutput.map(
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars omitting manualChunks
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ({ manualChunks: _, ...rest }) => rest,
         )
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars omitting manualChunks
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { manualChunks: _, ...rest } = rollupOutput
         resolvedConfig.build.rollupOptions.output = rest
       }
