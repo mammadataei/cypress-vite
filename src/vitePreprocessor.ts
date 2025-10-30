@@ -1,7 +1,34 @@
 import path from 'path'
-import { build, type InlineConfig } from 'vite'
+import { build, BuildEnvironmentOptions, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
+
+// get from Vite config type rather than from Rollup directly, since we don't
+/// have rollup as a dependency
+type RollupOutput = Exclude<
+  Exclude<BuildEnvironmentOptions['rollupOptions'], undefined>['output'],
+  undefined
+>
+
+type ExtractElement<T> = T extends (infer U)[] ? U : T
+// advancedChunks may be present when vite-rolldown is used
+type RollupOutputOptions = ExtractElement<RollupOutput> & {
+  advancedChunks?: unknown
+}
+
+function cleanRollupOutputOptions(
+  rollupOutputOption: RollupOutputOptions,
+): Omit<RollupOutputOptions, 'manualChunks' | 'advancedChunks'> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { manualChunks: _, advancedChunks: __, ...rest } = rollupOutputOption
+  return rest
+}
+
+function cleanRollupOutput(rollupOutput: RollupOutput) {
+  return Array.isArray(rollupOutput)
+    ? rollupOutput.map(cleanRollupOutputOptions)
+    : cleanRollupOutputOptions(rollupOutput)
+}
 
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
@@ -87,7 +114,11 @@ function vitePreprocessor(
       },
     }
 
-    const resolvedConfig: InlineConfig = {
+    const resolvedConfig: InlineConfig & {
+      build?: BuildEnvironmentOptions & {
+        rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
+      }
+    } = {
       ...config,
       ...defaultConfig,
     }
@@ -96,17 +127,11 @@ function vitePreprocessor(
     // Have tried various ways of overriding value, but can't find a value that
     // works with both rollup and rolldown. Straight-up deletion seems to be the
     // best move here.
-    if (resolvedConfig.build?.rollupOptions?.output) {
-      const rollupOutput = resolvedConfig.build.rollupOptions.output
-      if (Array.isArray(rollupOutput)) {
-        resolvedConfig.build.rollupOptions.output = rollupOutput.map(
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          ({ manualChunks: _, ...rest }) => rest,
+    for (const key of ['rollupOptions', 'rolldownOptions'] as const) {
+      if (resolvedConfig.build?.[key]?.output) {
+        resolvedConfig.build[key].output = cleanRollupOutput(
+          resolvedConfig.build[key].output,
         )
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { manualChunks: _, ...rest } = rollupOutput
-        resolvedConfig.build.rollupOptions.output = rest
       }
     }
 
