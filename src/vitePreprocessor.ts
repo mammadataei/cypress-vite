@@ -100,12 +100,17 @@ function vitePreprocessor(
         resolvedConfig.build[key].output = maybeMap(
           resolvedConfig.build[key].output,
           (o) => {
-            const { manualChunks, advancedChunks, codeSplitting, ...rest } =
-              o as typeof o & {
-                manualChunks?: unknown
-                advancedChunks?: unknown
-                codeSplitting?: unknown
-              }
+            // omit these options to delete them
+            const {
+              manualChunks: _mc,
+              advancedChunks: _ac,
+              codeSplitting: _cs,
+              ...rest
+            } = o as typeof o & {
+              manualChunks?: unknown
+              advancedChunks?: unknown
+              codeSplitting?: unknown
+            }
             return rest
           },
         )
