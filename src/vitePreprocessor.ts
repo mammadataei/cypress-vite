@@ -2,7 +2,7 @@ import path from 'path'
 import { build, BuildEnvironmentOptions, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
-import { maybeMap } from './utils'
+import { maybeMap, omit } from './utils'
 
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
@@ -99,20 +99,7 @@ function vitePreprocessor(
       if (resolvedConfig.build?.[key]?.output) {
         resolvedConfig.build[key].output = maybeMap(
           resolvedConfig.build[key].output,
-          (o) => {
-            // omit these options to delete them
-            const {
-              manualChunks: _mc,
-              advancedChunks: _ac,
-              codeSplitting: _cs,
-              ...rest
-            } = o as typeof o & {
-              manualChunks?: unknown
-              advancedChunks?: unknown
-              codeSplitting?: unknown
-            }
-            return rest
-          },
+          (o) => omit(o, 'manualChunks', 'advancedChunks', 'codeSplitting'),
         )
       }
     }
