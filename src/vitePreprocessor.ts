@@ -2,9 +2,7 @@ import path from 'path'
 import { build, BuildEnvironmentOptions, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
-
-const maybeMap = <I, O>(value: I | I[], modifier: (item: I) => O): O | O[] =>
-  Array.isArray(value) ? value.map(modifier) : modifier(value)
+import { maybeMap } from './utils'
 
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
