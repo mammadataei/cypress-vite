@@ -84,7 +84,8 @@ function vitePreprocessor(
 
     const resolvedConfig: InlineConfig & {
       build?: InlineConfig['build'] & {
-        // just copy the type from rullupOptions, so we don't have to
+        // `rolldownOptions` is used instead of `rollupOptions` in Vite 8.
+        // Just copy the type from `rollupOptions`, so we don't have to
         // maintain another type or install another package.
         rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
       }
