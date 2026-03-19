@@ -3,32 +3,8 @@ import { build, BuildEnvironmentOptions, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 
-// get from Vite config type rather than from Rollup directly, since we don't
-/// have rollup as a dependency
-type RollupOutput = Exclude<
-  Exclude<BuildEnvironmentOptions['rollupOptions'], undefined>['output'],
-  undefined
->
-
-type ExtractElement<T> = T extends (infer U)[] ? U : T
-// advancedChunks may be present when vite-rolldown is used
-type RollupOutputOptions = ExtractElement<RollupOutput> & {
-  advancedChunks?: unknown
-}
-
-function cleanRollupOutputOptions(
-  rollupOutputOption: RollupOutputOptions,
-): Omit<RollupOutputOptions, 'manualChunks' | 'advancedChunks'> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { manualChunks: _, advancedChunks: __, ...rest } = rollupOutputOption
-  return rest
-}
-
-function cleanRollupOutput(rollupOutput: RollupOutput) {
-  return Array.isArray(rollupOutput)
-    ? rollupOutput.map(cleanRollupOutputOptions)
-    : cleanRollupOutputOptions(rollupOutput)
-}
+const maybeMap = <I, O>(value: I | I[], modifier: (item: I) => O): O | O[] =>
+  Array.isArray(value) ? value.map(modifier) : modifier(value)
 
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
@@ -105,17 +81,13 @@ function vitePreprocessor(
           formats: ['umd'],
           name: filenameWithoutExtension,
         },
-        // Just delete manualChunks rather than trying to override/merge
-        // rollupOptions: {
-        //   output: {
-        //     manualChunks: undefined ,
-        //   },
-        // },
       },
     }
 
     const resolvedConfig: InlineConfig & {
-      build?: BuildEnvironmentOptions & {
+      build?: InlineConfig['build'] & {
+        // just copy the type from rullupOptions, so we don't have to
+        // maintain another type or install another package.
         rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
       }
     } = {
@@ -123,14 +95,20 @@ function vitePreprocessor(
       ...defaultConfig,
     }
 
-    // Remove any manualChunks.
-    // Have tried various ways of overriding value, but can't find a value that
-    // works with both rollup and rolldown. Straight-up deletion seems to be the
-    // best move here.
+    // Remove any manualChunks or advancedChunks.
     for (const key of ['rollupOptions', 'rolldownOptions'] as const) {
       if (resolvedConfig.build?.[key]?.output) {
-        resolvedConfig.build[key].output = cleanRollupOutput(
+        resolvedConfig.build[key].output = maybeMap(
           resolvedConfig.build[key].output,
+          (o) => {
+            const { manualChunks, advancedChunks, codeSplitting, ...rest } =
+              o as typeof o & {
+                manualChunks?: unknown
+                advancedChunks?: unknown
+                codeSplitting?: unknown
+              }
+            return rest
+          },
         )
       }
     }
