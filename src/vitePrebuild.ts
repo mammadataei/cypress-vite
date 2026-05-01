@@ -65,7 +65,7 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
 
     debug(`Pre-building ${files.length} files with Vite.`)
 
-    const resolvedConfig = mergeConfig(config, {
+    const resolvedConfig: InlineConfig = mergeConfig(config, {
       // overrides
       build: {
         outDir: OUT_DIR,

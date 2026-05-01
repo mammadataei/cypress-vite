@@ -1,7 +1,8 @@
 import path from 'path'
-import { build, mergeConfig, type InlineConfig } from 'vite'
+import { build, mergeConfig, type BuildEnvironmentOptions, type InlineConfig } from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
+import { maybeMap, omit } from './utils'
 
 const watchers: Record<string, chokidar.FSWatcher> = {}
 
@@ -60,7 +61,14 @@ function vitePreprocessor(
       })
     }
 
-    const resolvedConfig = mergeConfig(
+    const resolvedConfig: InlineConfig & {
+      build?: InlineConfig['build'] & {
+        // `rolldownOptions` is used instead of `rollupOptions` in Vite 8.
+        // Just copy the type from `rollupOptions`, so we don't have to
+        // maintain another type or install another package.
+        rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
+      }
+    } = mergeConfig(
       {
         // defaults
         logLevel: 'warn',
@@ -85,16 +93,29 @@ function vitePreprocessor(
             formats: ['umd'],
             name: filenameWithoutExtension,
           },
-          rollupOptions: {
-            output: {
-              // override any manualChunks from the user config because they don't work with UMD
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              manualChunks: false as any,
-            },
-          },
         },
       } satisfies InlineConfig,
     )
+
+    // Remove any manualChunks or advancedChunks.
+    for (const key of ['rollupOptions', 'rolldownOptions'] as const) {
+      if (resolvedConfig.build?.[key]?.output) {
+        resolvedConfig.build[key].output = maybeMap(
+          resolvedConfig.build[key].output,
+          (o) =>
+            omit(
+              o as typeof o & {
+                manualChunks?: unknown
+                advancedChunks?: unknown
+                codeSplitting?: unknown
+              },
+              'manualChunks',
+              'advancedChunks',
+              'codeSplitting',
+            ),
+        )
+      }
+    }
 
     await build(resolvedConfig)
 
