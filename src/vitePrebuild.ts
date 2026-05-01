@@ -65,21 +65,21 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
 
     debug(`Pre-building ${files.length} files with Vite.`)
 
-    await build(
-      mergeConfig(viteConfig, {
-        build: {
-          outDir: OUT_DIR,
-          emptyOutDir: true,
-          minify: false,
-          rollupOptions: {
-            input: files,
-            output: { entryFileNames: '[name].ts', format: 'es' },
-            treeshake: true,
-          },
+    const resolvedConfig: InlineConfig = mergeConfig(viteConfig, {
+      build: {
+        outDir: OUT_DIR,
+        emptyOutDir: true,
+        minify: false,
+        rollupOptions: {
+          input: files,
+          output: { entryFileNames: '[name].ts', format: 'es' },
+          treeshake: true,
         },
-        esbuild: { treeShaking: true },
-      } satisfies InlineConfig),
-    )
+      },
+      esbuild: { treeShaking: true },
+    } satisfies InlineConfig)
+
+    await build(resolvedConfig)
   }
 
   function customVitePreprocessor(file: Cypress.FileObject) {
