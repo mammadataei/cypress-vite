@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/mammadataei/cypress-vite/compare/v1.8.0...v1.8.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* manualChunks deletion / override ([#137](https://github.com/mammadataei/cypress-vite/issues/137)) ([4e630c1](https://github.com/mammadataei/cypress-vite/commit/4e630c142958ff9b8fe34b33ebd99b12d2dbffea))
+
 ## [1.8.0](https://github.com/mammadataei/cypress-vite/compare/v1.7.0...v1.8.0) (2025-09-11)
 
 
