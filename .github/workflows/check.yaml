@@ -86,7 +86,9 @@ jobs:
             cypress-version: 15
             plugin-react-version: '6'
 
-    name: test (vite@${{ matrix.vite-version }}, cypress@${{ matrix.cypress-version }})
+    name:
+      test (vite@${{ matrix.vite-version }}, cypress@${{ matrix.cypress-version
+      }})
 
     steps:
       - uses: actions/checkout@v4
@@ -110,7 +112,8 @@ jobs:
             ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
             ~/.cache/Cypress
           key:
-            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-cypress${{ matrix.cypress-version }}-${{
+            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version
+            }}-cypress${{ matrix.cypress-version }}-${{
             hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-cypress${{ matrix.cypress-version }}-
