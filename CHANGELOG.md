@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/mammadataei/cypress-vite/compare/v1.8.1...v1.9.0) (2026-05-02)
+
+
+### Features
+
+* test and allow vite v8 ([#150](https://github.com/mammadataei/cypress-vite/issues/149)) ([4def7f5](https://github.com/mammadataei/cypress-vite/commit/4def7f58c4ba9b09d7cf751becf68bac61f9622b))
+
 ## [1.8.1](https://github.com/mammadataei/cypress-vite/compare/v1.8.0...v1.8.1) (2026-05-01)
 
 
