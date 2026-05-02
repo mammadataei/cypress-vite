@@ -5,7 +5,7 @@
 
 ### Features
 
-* test and allow vite v8 ([#150](https://github.com/mammadataei/cypress-vite/issues/150)) ([456a29b](https://github.com/mammadataei/cypress-vite/commit/456a29b250c8bab2d25fd254018c08dd5817020a))
+* test and allow vite v8 ([#150](https://github.com/mammadataei/cypress-vite/issues/149)) ([4def7f5](https://github.com/mammadataei/cypress-vite/commit/4def7f58c4ba9b09d7cf751becf68bac61f9622b))
 
 ## [1.8.1](https://github.com/mammadataei/cypress-vite/compare/v1.8.0...v1.8.1) (2026-05-01)
 
