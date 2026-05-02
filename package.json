@@ -35,7 +35,7 @@
     "example": "pnpm --filter example",
     "test": "pnpm --filter example test",
     "format": "prettier --write . && pnpm lint --fix",
-    "lint": "eslint . && prettier --check .",
+    "lint": "tsc && eslint . && prettier --check .",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
