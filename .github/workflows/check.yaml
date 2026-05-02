@@ -49,7 +49,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        vite-version: ['2.9', '3', '4', '5', '6', '7']
+        include:
+          - vite-version: '2.9'
+            plugin-react-version: '2'
+          - vite-version: '3'
+            plugin-react-version: '3'
+          - vite-version: '4'
+            plugin-react-version: '4'
+          - vite-version: '5'
+            plugin-react-version: '4'
+          - vite-version: '6'
+            plugin-react-version: '4'
+          - vite-version: '7'
+            plugin-react-version: '4'
 
     name: test (vite@${{ matrix.vite-version }})
 
@@ -85,7 +97,9 @@ jobs:
         run: pnpm i
 
       - name: Override Vite version
-        run: pnpm --filter example add vite@${{ matrix.vite-version }}
+        run:
+          pnpm --filter example add vite@${{ matrix.vite-version }}
+          @vitejs/plugin-react@${{ matrix.plugin-react-version }}
 
       - name: Run Tests
         uses: cypress-io/github-action@v4
