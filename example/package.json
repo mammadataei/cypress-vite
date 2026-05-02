@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5173",
     "cypress": "start-server-and-test dev http://localhost:5173 'cypress open'",
     "cypress-run-all": "cypress run && cypress run --config-file cypress-prebuild.config.ts",
     "test": "start-server-and-test dev http://localhost:5173 cypress-run-all",
