@@ -48,7 +48,7 @@ jobs:
 
     strategy:
       matrix:
-        vite-version: ['5', '6', '7']
+        vite-version: ['3', '4', '5', '6', '7']
 
     name: test (vite@${{ matrix.vite-version }})
 
