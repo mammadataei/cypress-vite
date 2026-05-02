@@ -49,6 +49,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        vite-version: ['2.9', '3', '4', '5', '6', '7', '8']
+        cypress-version: [13, 14, 15, 16]
         include:
           - vite-version: '2.9'
             plugin-react-version: '1'
@@ -65,7 +67,7 @@ jobs:
           - vite-version: '8'
             plugin-react-version: '6'
 
-    name: test (vite@${{ matrix.vite-version }})
+    name: test (vite@${{ matrix.vite-version }}, cypress@${{ matrix.cypress-version }})
 
     steps:
       - uses: actions/checkout@v4
@@ -89,9 +91,10 @@ jobs:
             ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
             ~/.cache/Cypress
           key:
-            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-${{
+            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-cypress${{ matrix.cypress-version }}-${{
             hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
+            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-cypress${{ matrix.cypress-version }}-
             ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-
             ${{ runner.os }}-pnpm-store-
 
@@ -102,6 +105,9 @@ jobs:
         run:
           pnpm --filter example add vite@${{ matrix.vite-version }}
           @vitejs/plugin-react@${{ matrix.plugin-react-version }}
+
+      - name: Override Cypress version
+        run: pnpm --filter example add cypress@${{ matrix.cypress-version }}
 
       - name: Run Tests
         uses: cypress-io/github-action@v4
