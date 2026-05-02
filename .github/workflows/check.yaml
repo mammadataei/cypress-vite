@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Lint
-        run: pnpm lint
+      - name: Lint & TS Check
+        run: pnpm check
 
   build:
     runs-on: ubuntu-latest
