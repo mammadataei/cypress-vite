@@ -1,5 +1,10 @@
 import path from 'path'
-import { build, mergeConfig, type BuildEnvironmentOptions, type InlineConfig } from 'vite'
+import {
+  build,
+  mergeConfig,
+  type BuildEnvironmentOptions,
+  type InlineConfig,
+} from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 import { maybeMap, omit } from './utils'
