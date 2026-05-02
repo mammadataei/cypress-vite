@@ -53,15 +53,17 @@ jobs:
           - vite-version: '2.9'
             plugin-react-version: '1'
           - vite-version: '3'
-            plugin-react-version: '3'
+            plugin-react-version: '2'
           - vite-version: '4'
-            plugin-react-version: '4'
+            plugin-react-version: '3'
           - vite-version: '5'
             plugin-react-version: '4'
           - vite-version: '6'
             plugin-react-version: '4'
           - vite-version: '7'
             plugin-react-version: '4'
+          # - vite-version: '8'
+          #   plugin-react-version: '6'
 
     name: test (vite@${{ matrix.vite-version }})
 
