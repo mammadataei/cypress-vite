@@ -51,7 +51,7 @@ jobs:
       matrix:
         include:
           - vite-version: '2.9'
-            plugin-react-version: '2'
+            plugin-react-version: '1'
           - vite-version: '3'
             plugin-react-version: '3'
           - vite-version: '4'
