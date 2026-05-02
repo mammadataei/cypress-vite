@@ -49,22 +49,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        vite-version: ['2.9', '3', '4', '5', '6', '7', '8']
-        cypress-version: [11, 12, 13, 14, 15]
         include:
+          # Each permitted Vite version against same version of Cypress
           - vite-version: '2.9'
+            cypress-version: 14
             plugin-react-version: '1'
           - vite-version: '3'
+            cypress-version: 14
             plugin-react-version: '2'
           - vite-version: '4'
+            cypress-version: 14
             plugin-react-version: '3'
           - vite-version: '5'
+            cypress-version: 14
             plugin-react-version: '4'
           - vite-version: '6'
+            cypress-version: 14
             plugin-react-version: '4'
           - vite-version: '7'
+            cypress-version: 14
             plugin-react-version: '4'
           - vite-version: '8'
+            cypress-version: 14
+            plugin-react-version: '6'
+          # Each Cypress version against latest permitted Vite version
+          - vite-version: '8'
+            cypress-version: 12
+            plugin-react-version: '6'
+          - vite-version: '8'
+            cypress-version: 13
+            plugin-react-version: '6'
+          - vite-version: '8'
+            cypress-version: 14
+            plugin-react-version: '6'
+          - vite-version: '8'
+            cypress-version: 15
             plugin-react-version: '6'
 
     name: test (vite@${{ matrix.vite-version }}, cypress@${{ matrix.cypress-version }})
