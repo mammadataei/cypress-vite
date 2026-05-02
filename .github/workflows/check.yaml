@@ -84,9 +84,7 @@ jobs:
         run: pnpm i
 
       - name: Override Vite version
-        run:
-          pnpm --filter example add vite@${{ matrix.vite-version }}
-          --no-frozen-lockfile
+        run: pnpm --filter example add vite@${{ matrix.vite-version }}
 
       - name: Run Tests
         uses: cypress-io/github-action@v4
