@@ -73,7 +73,9 @@ jobs:
           path: |
             ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
             ~/.cache/Cypress
-          key: ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key:
+            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-${{
+            hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-
             ${{ runner.os }}-pnpm-store-
@@ -82,7 +84,9 @@ jobs:
         run: pnpm i
 
       - name: Override Vite version
-        run: pnpm --filter example add vite@${{ matrix.vite-version }} --no-frozen-lockfile
+        run:
+          pnpm --filter example add vite@${{ matrix.vite-version }}
+          --no-frozen-lockfile
 
       - name: Run Tests
         uses: cypress-io/github-action@v4
