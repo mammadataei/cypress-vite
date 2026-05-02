@@ -30,7 +30,7 @@ let wasPrebuilt = true
  * },
  */
 export function getVitePrebuilder(userConfig?: InlineConfig | string) {
-  const viteConfig: InlineConfig = getConfig(userConfig)
+  const config: InlineConfig = getConfig(userConfig)
 
   const OUT_DIR = 'node_modules/.cypress-vite-prebuild'
 
@@ -40,16 +40,16 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
    *
    * @param details
    *    Cypress details
-   * @param config
+   * @param cypressConfig
    *    Cypress config
    */
   async function maybeVitePrebuild(
     details: Cypress.BeforeRunDetails,
-    config: Cypress.PluginConfigOptions,
+    cypressConfig: Cypress.PluginConfigOptions,
   ) {
     // TODO: there may be a way to get it to work for watch mode... Could we watch the file while keeping imported assets?
     if (
-      config.watchForFileChanges ||
+      cypressConfig.watchForFileChanges ||
       !details.specs ||
       details.specs.length < 2
     ) {
@@ -59,13 +59,14 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
       return
     }
     const files: string[] = details.specs.map((spec) => spec.absolute)
-    if (config.supportFile) {
-      files.push(config.supportFile)
+    if (cypressConfig.supportFile) {
+      files.push(cypressConfig.supportFile)
     }
 
     debug(`Pre-building ${files.length} files with Vite.`)
 
-    const resolvedConfig: InlineConfig = mergeConfig(viteConfig, {
+    const resolvedConfig: InlineConfig = mergeConfig(config, {
+      // overrides
       build: {
         outDir: OUT_DIR,
         emptyOutDir: true,
@@ -88,7 +89,7 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
     }
 
     // TODO: make so initial preprocess works, don't have to re-preprocess here
-    return baseVitePreprocessor(viteConfig)(file)
+    return baseVitePreprocessor(config)(file)
   }
 
   return {

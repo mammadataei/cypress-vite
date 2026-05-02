@@ -1,5 +1,10 @@
 import path from 'path'
-import { build, type BuildEnvironmentOptions, type InlineConfig } from 'vite'
+import {
+  build,
+  mergeConfig,
+  type BuildEnvironmentOptions,
+  type InlineConfig,
+} from 'vite'
 import chokidar from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 import { maybeMap, omit } from './utils'
@@ -61,27 +66,6 @@ function vitePreprocessor(
       })
     }
 
-    const defaultConfig: InlineConfig = {
-      logLevel: 'warn',
-      define: {
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      },
-      build: {
-        emptyOutDir: false,
-        minify: false,
-        outDir: path.dirname(outputPath),
-        sourcemap: true,
-        write: true,
-        watch: null,
-        lib: {
-          entry: filePath,
-          fileName: () => fileName,
-          formats: ['umd'],
-          name: filenameWithoutExtension,
-        },
-      },
-    }
-
     const resolvedConfig: InlineConfig & {
       build?: InlineConfig['build'] & {
         // `rolldownOptions` is used instead of `rollupOptions` in Vite 8.
@@ -89,10 +73,34 @@ function vitePreprocessor(
         // maintain another type or install another package.
         rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
       }
-    } = {
-      ...config,
-      ...defaultConfig,
-    }
+    } = mergeConfig(
+      {
+        // defaults
+        logLevel: 'warn',
+        // user config
+        ...config,
+      },
+      // overrides
+      {
+        define: {
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        },
+        build: {
+          emptyOutDir: false,
+          minify: false,
+          outDir: path.dirname(outputPath),
+          sourcemap: true,
+          write: true,
+          watch: null,
+          lib: {
+            entry: filePath,
+            fileName: () => fileName,
+            formats: ['umd'],
+            name: filenameWithoutExtension,
+          },
+        },
+      } satisfies InlineConfig,
+    )
 
     // Remove any manualChunks or advancedChunks.
     for (const key of ['rollupOptions', 'rolldownOptions'] as const) {
