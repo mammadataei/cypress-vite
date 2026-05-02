@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/mammadataei/cypress-vite/compare/v1.9.0...v1.9.1) (2026-05-02)
+
+
+### Bug Fixes
+
+* **vitePreprocessor:** use Vite's mergeConfig instead of completely overriding ([#133](https://github.com/mammadataei/cypress-vite/issues/133)) ([67cbe62](https://github.com/mammadataei/cypress-vite/commit/67cbe62ee164aa5856dd11de60d4f66f986b2bc0))
+
 ## [1.9.0](https://github.com/mammadataei/cypress-vite/compare/v1.8.1...v1.9.0) (2026-05-02)
 
 
