@@ -46,6 +46,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        vite-version: ['5', '6', '7']
+
+    name: test (vite@${{ matrix.vite-version }})
+
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -67,12 +73,16 @@ jobs:
           path: |
             ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
             ~/.cache/Cypress
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
+            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version }}-
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm i
+
+      - name: Override Vite version
+        run: pnpm --filter example add vite@${{ matrix.vite-version }} --no-frozen-lockfile
 
       - name: Run Tests
         uses: cypress-io/github-action@v4
