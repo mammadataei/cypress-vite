@@ -68,5 +68,5 @@
     "chokidar": "^3.5.3",
     "debug": "^4.4.3"
   },
-  "packageManager": "pnpm@9.15.9"
+  "packageManager": "pnpm@10.33.2"
 }
