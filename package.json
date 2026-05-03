@@ -65,7 +65,7 @@
     "vite": "^8.0.0"
   },
   "dependencies": {
-    "chokidar": "^3.5.3",
+    "chokidar": "^5.0.0",
     "debug": "^4.4.3"
   },
   "packageManager": "pnpm@9.15.9"
