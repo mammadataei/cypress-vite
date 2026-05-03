@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "node16",
-    "moduleResolution": "node16",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "lib": ["esnext", "dom"],
     "types": ["cypress"],
     "esModuleInterop": true,
     "isolatedModules": true,
+    "resolveJsonModule": true,
     "declaration": true,
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "noEmit": true
   },
   "include": ["src"],
