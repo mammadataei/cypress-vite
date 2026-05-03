@@ -78,7 +78,7 @@ importers:
     devDependencies:
       '@ngneat/falso':
         specifier: ^7.2.0
-        version: 7.2.0
+        version: 7.4.0
       '@testing-library/cypress':
         specifier: ^10.0.3
         version: 10.1.3(cypress@14.5.2)
@@ -574,8 +574,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.29':
     resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
 
-  '@ngneat/falso@7.2.0':
-    resolution: {integrity: sha512-283EXBFd05kCbGuGSXgmvhCsQYEYzvD/eJaE7lxd05qRB0tgREvZX7TRlJ1KSp8nHxoK6Ws029G1Y30mt4IVAA==}
+  '@ngneat/falso@7.4.0':
+    resolution: {integrity: sha512-7MzPP0YGNHDrohf/epmz6SVIjHGhKyHbh0bm+iZ1z/7KVW4xZi9Dx6Tl9NMPy6a4lWh/t3WXSsCGkgkuJ/eroQ==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3632,7 +3632,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@ngneat/falso@7.2.0':
+  '@ngneat/falso@7.4.0':
     dependencies:
       seedrandom: 3.0.5
       uuid: 8.3.2
