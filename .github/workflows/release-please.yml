@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v6
         if: ${{ steps.release.outputs.release_created }}
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           run_install: false
         if: ${{ steps.release.outputs.release_created }}
