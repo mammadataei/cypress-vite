@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "useDefineForClassFields": true,
+    "module": "node16",
+    "moduleResolution": "node16",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "types": ["cypress", "@testing-library/cypress"],
     "allowJs": false,
@@ -10,8 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "node16",
-    "moduleResolution": "node16",
+    "useDefineForClassFields": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

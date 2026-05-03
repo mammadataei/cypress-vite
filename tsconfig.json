@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext",
+    "module": "node16",
+    "moduleResolution": "node16",
     "lib": ["esnext", "dom"],
     "types": ["cypress"],
-    "moduleResolution": "node16",
     "esModuleInterop": true,
     "isolatedModules": true,
     "declaration": true,
