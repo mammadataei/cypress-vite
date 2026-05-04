@@ -5,11 +5,11 @@ import {
   type BuildEnvironmentOptions,
   type InlineConfig,
 } from 'vite'
-import chokidar from 'chokidar'
+import { watch, FSWatcher } from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 import { maybeMap, omit } from './utils'
 
-const watchers: Record<string, chokidar.FSWatcher> = {}
+const watchers: Record<string, FSWatcher> = {}
 
 /**
  * Cypress preprocessor for running e2e tests using vite.
@@ -47,7 +47,7 @@ function vitePreprocessor(
       // Watch this spec file if we are not already doing so (and Cypress is
       // not in headless mode)
       let initial = true
-      watchers[filePath] = chokidar.watch(filePath)
+      watchers[filePath] = watch(filePath)
       debug('Watcher for file %s cached', filePath)
 
       file.on('close', async () => {
