@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/mammadataei/cypress-vite/compare/v1.9.1...v1.10.0) (2026-05-05)
+
+
+### Features
+
+* move all deps to peerDeps ([#183](https://github.com/mammadataei/cypress-vite/issues/183)) ([964392f](https://github.com/mammadataei/cypress-vite/commit/964392f05c5a398c18fa54a430487989d21eadc6))
+
 ## [1.9.1](https://github.com/mammadataei/cypress-vite/compare/v1.9.0...v1.9.1) (2026-05-02)
 
 
