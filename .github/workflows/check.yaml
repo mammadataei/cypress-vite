@@ -132,7 +132,7 @@ jobs:
         run: pnpm --filter example add cypress@${{ matrix.cypress-version }}
 
       - name: Run Tests
-        uses: cypress-io/github-action@v7.1.10
+        uses: cypress-io/github-action@v7.3.0
         with:
           install: false
           build: pnpm build
