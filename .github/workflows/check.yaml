@@ -45,64 +45,53 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    env:
+      DEFAULT_VITE_VERSION: 8
+      DEFAULT_PLUGIN_REACT_VERSION: 6
+      DEFAULT_CYPRESS_VERSION: 14
+      DEFAULT_CHOKIDAR_VERSION: 5
+      DEFAULT_DEBUG_VERSION: 4
+
     strategy:
       fail-fast: false
       matrix:
         include:
-          - &matrix-defaults
-            vite-version: 8
-            plugin-react-version: 6
-            cypress-version: 14
-            chokidar-version: 5
-            debug-version: 4
-
           # Each permitted Vite version against same version of Cypress
-          - <<: *matrix-defaults
-            vite-version: '2.9'
+          - vite-version: '2.9'
             plugin-react-version: 1
-          - <<: *matrix-defaults
-            vite-version: 3
+          - vite-version: 3
             plugin-react-version: 2
-          - <<: *matrix-defaults
-            vite-version: 4
+          - vite-version: 4
             plugin-react-version: 3
-          - <<: *matrix-defaults
-            vite-version: 5
+          - vite-version: 5
             plugin-react-version: 4
-          - <<: *matrix-defaults
-            vite-version: 6
+          - vite-version: 6
             plugin-react-version: 4
-          - <<: *matrix-defaults
-            vite-version: 7
+          - vite-version: 7
             plugin-react-version: 4
           # default values, are tested below.
-          # - <<: *matrix-defaults
-          #   vite-version: 8
+          # - vite-version: 8
           #   plugin-react-version: 6
 
           # Each Cypress version against latest permitted Vite version,
           # testing permitted versions of other peerDependencies at the same time.
-          - <<: *matrix-defaults
-            cypress-version: 12
+          - cypress-version: 12
             chokidar-version: 2
             debug-version: 2
-          - <<: *matrix-defaults
-            cypress-version: 13
+          - cypress-version: 13
             chokidar-version: 3
             debug-version: 2
-          - <<: *matrix-defaults
-            cypress-version: 14
+          - cypress-version: 14
             chokidar-version: 4
             debug-version: 3
-          - <<: *matrix-defaults
-            cypress-version: 15
+          - cypress-version: 15
             chokidar-version: 5
             debug-version: 4
 
     name:
-      test (vite@${{ matrix.vite-version }}, cypress@${{ matrix.cypress-version
-      }}, chokidar@${{ matrix.chokidar-version }}, debug@${{
-      matrix.debug-version }})
+      test (vite@${{ matrix.vite-version || 8 }}, cypress@${{
+      matrix.cypress-version || 14 }}, chokidar@${{ matrix.chokidar-version || 5
+      }}, debug@${{ matrix.debug-version || 4 }})
 
     steps:
       - uses: actions/checkout@v6
@@ -114,6 +103,16 @@ jobs:
         with:
           node-version: 22.x
 
+      - name: Resolve effective dependency versions
+        id: versions
+        shell: bash
+        run: |
+          echo "vite=${{ matrix.vite-version || env.DEFAULT_VITE_VERSION }}" >> "$GITHUB_OUTPUT"
+          echo "plugin_react=${{ matrix.plugin-react-version || env.DEFAULT_PLUGIN_REACT_VERSION }}" >> "$GITHUB_OUTPUT"
+          echo "cypress=${{ matrix.cypress-version || env.DEFAULT_CYPRESS_VERSION }}" >> "$GITHUB_OUTPUT"
+          echo "chokidar=${{ matrix.chokidar-version || env.DEFAULT_CHOKIDAR_VERSION }}" >> "$GITHUB_OUTPUT"
+          echo "debug=${{ matrix.debug-version || env.DEFAULT_DEBUG_VERSION }}" >> "$GITHUB_OUTPUT"
+
       - name: Get pnpm store directory
         id: pnpm-cache
         run: |
@@ -123,9 +122,10 @@ jobs:
         name: Setup pnpm cache
         env:
           CACHE_KEY_PREFIX:
-            ${{ runner.os }}-pnpm-store-vite${{ matrix.vite-version
-            }}-cypress${{ matrix.cypress-version }}-chokidar${{
-            matrix.chokidar-version }}-debug${{ matrix.debug-version }}
+            ${{ runner.os }}-pnpm-store-vite${{ steps.versions.outputs.vite
+            }}-cypress${{ steps.versions.outputs.cypress }}-chokidar${{
+            steps.versions.outputs.chokidar }}-debug${{
+            steps.versions.outputs.debug }}
         with:
           path: |
             ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
@@ -139,10 +139,11 @@ jobs:
 
       - name: Override dependency versions
         run:
-          pnpm --filter example add vite@${{ matrix.vite-version }}
-          @vitejs/plugin-react@${{ matrix.plugin-react-version }} cypress@${{
-          matrix.cypress-version }} chokidar@${{ matrix.chokidar-version }}
-          debug@${{ matrix.debug-version }}
+          pnpm --filter example add vite@${{ steps.versions.outputs.vite }}
+          @vitejs/plugin-react@${{ steps.versions.outputs.plugin_react }}
+          cypress@${{ steps.versions.outputs.cypress }} chokidar@${{
+          steps.versions.outputs.chokidar }} debug@${{
+          steps.versions.outputs.debug }}
 
       - name: Run Tests
         uses: cypress-io/github-action@v7.3.0
