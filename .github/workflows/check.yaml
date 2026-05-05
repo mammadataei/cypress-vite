@@ -140,9 +140,8 @@ jobs:
       - name: Override dependency versions
         run:
           pnpm --filter example add vite@${{ matrix.vite-version }}
-          @vitejs/plugin-react@${{ matrix.plugin-react-version }}
-          cypress@${{ matrix.cypress-version }}
-          chokidar@${{ matrix.chokidar-version }}
+          @vitejs/plugin-react@${{ matrix.plugin-react-version }} cypress@${{
+          matrix.cypress-version }} chokidar@${{ matrix.chokidar-version }}
           debug@${{ matrix.debug-version }}
 
       - name: Run Tests
