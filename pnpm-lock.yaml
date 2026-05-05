@@ -8,11 +8,8 @@ importers:
 
   .:
     dependencies:
-      chokidar:
-        specifier: ^5.0.0
-        version: 5.0.0
       debug:
-        specifier: ^4.4.3
+        specifier: ^2 || ^3 || ^4
         version: 4.4.3(supports-color@8.1.1)
     devDependencies:
       '@commitlint/cli':
@@ -33,6 +30,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.59.0
         version: 8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
+      chokidar:
+        specifier: ^5.0.0
+        version: 5.0.0
       cypress:
         specifier: ^15.0.0
         version: 15.14.2
