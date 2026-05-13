@@ -1,10 +1,5 @@
 import path from 'path'
-import {
-  build,
-  mergeConfig,
-  type BuildEnvironmentOptions,
-  type InlineConfig,
-} from 'vite'
+import { build, mergeConfig, type InlineConfig } from 'vite'
 import { watch, FSWatcher } from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 import { maybeMap, omit } from './utils'
@@ -66,14 +61,7 @@ function vitePreprocessor(
       })
     }
 
-    const resolvedConfig: InlineConfig & {
-      build?: InlineConfig['build'] & {
-        // `rolldownOptions` is used instead of `rollupOptions` in Vite 8.
-        // Just copy the type from `rollupOptions`, so we don't have to
-        // maintain another type or install another package.
-        rolldownOptions?: BuildEnvironmentOptions['rollupOptions']
-      }
-    } = mergeConfig(
+    const resolvedConfig: InlineConfig = mergeConfig(
       {
         // defaults
         logLevel: 'warn',
