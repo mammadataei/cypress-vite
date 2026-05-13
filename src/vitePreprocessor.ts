@@ -107,17 +107,7 @@ function vitePreprocessor(
       if (resolvedConfig.build?.[key]?.output) {
         resolvedConfig.build[key].output = maybeMap(
           resolvedConfig.build[key].output,
-          (o) =>
-            omit(
-              o as typeof o & {
-                manualChunks?: unknown
-                advancedChunks?: unknown
-                codeSplitting?: unknown
-              },
-              'manualChunks',
-              'advancedChunks',
-              'codeSplitting',
-            ),
+          (o) => omit(o, 'manualChunks', 'advancedChunks', 'codeSplitting'),
         )
       }
     }
