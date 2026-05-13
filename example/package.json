@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite --port 5173",
     "cypress": "start-server-and-test dev http://localhost:5173 'cypress open'",
-    "cypress-run-all": "cypress run && cypress run --config-file cypress-prebuild.config.ts",
+    "cypress-run-all": "pnpm cypress:run && pnpm cypress:run:prebuild && pnpm cypress:run:spec && pnpm cypress:run:prebuild:spec",
+    "cypress:run": "cypress run",
+    "cypress:run:prebuild": "cypress run --config-file cypress-prebuild.config.ts",
+    "cypress:run:spec": "pnpm cypress:run --spec 'cypress/tests/App.e2e.ts'",
+    "cypress:run:prebuild:spec": "pnpm cypress:run:prebuild --spec 'cypress/tests/App.e2e.ts'",
     "test": "start-server-and-test dev http://localhost:5173 cypress-run-all",
     "test:ci": "pnpm cypress-run-all",
     "build": "tsc && vite build",
