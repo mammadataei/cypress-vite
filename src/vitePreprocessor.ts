@@ -3,7 +3,7 @@ import { build, mergeConfig, type InlineConfig } from 'vite'
 import { watch, FSWatcher } from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
 import { maybeMap } from './utils'
-import { omit } from 'es-toolkit'
+import { omit, isEmptyObject } from 'es-toolkit'
 
 const watchers: Record<string, FSWatcher> = {}
 
@@ -98,6 +98,18 @@ function vitePreprocessor(
         buildConfig.output = maybeMap(buildConfig.output, (o) =>
           omit(o, ['manualChunks', 'advancedChunks', 'codeSplitting']),
         )
+        // If output is now an empty object or array of empty objects, remove it
+        if (
+          (Array.isArray(buildConfig.output) &&
+            buildConfig.output.every(isEmptyObject)) ||
+          isEmptyObject(buildConfig.output)
+        ) {
+          delete buildConfig.output
+        }
+      }
+      // If the whole options object is now empty, remove it
+      if (buildConfig && isEmptyObject(buildConfig) && resolvedConfig.build) {
+        delete resolvedConfig.build[key]
       }
     }
 
