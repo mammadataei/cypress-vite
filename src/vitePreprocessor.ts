@@ -2,7 +2,8 @@ import path from 'path'
 import { build, mergeConfig, type InlineConfig } from 'vite'
 import { watch, FSWatcher } from 'chokidar'
 import { debug, getConfig, type CypressPreprocessor } from './common'
-import { maybeMap, omit } from './utils'
+import { maybeMap } from './utils'
+import { omit } from 'es-toolkit'
 
 const watchers: Record<string, FSWatcher> = {}
 
@@ -90,12 +91,12 @@ function vitePreprocessor(
       } satisfies InlineConfig,
     )
 
-    // Remove any manualChunks or advancedChunks.
+    // Remove any manualChunks, advancedChunks, or codeSplitting.
     for (const key of ['rollupOptions', 'rolldownOptions'] as const) {
-      if (resolvedConfig.build?.[key]?.output) {
-        resolvedConfig.build[key].output = maybeMap(
-          resolvedConfig.build[key].output,
-          (o) => omit(o, 'manualChunks', 'advancedChunks', 'codeSplitting'),
+      const buildConfig = resolvedConfig.build?.[key]
+      if (buildConfig?.output) {
+        buildConfig.output = maybeMap(buildConfig.output, (o) =>
+          omit(o, ['manualChunks', 'advancedChunks', 'codeSplitting']),
         )
       }
     }

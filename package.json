@@ -59,6 +59,7 @@
     "chokidar": "^5.0.0",
     "cypress": "^15.15.0",
     "debug": "^4.4.3",
+    "es-toolkit": "^1.46.1",
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
