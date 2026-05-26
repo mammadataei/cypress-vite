@@ -1,13 +1,5 @@
 # Changelog
 
-
-## [1.10.1](https://github.com/mammadataei/cypress-vite/compare/v1.10.0...v1.10.1) (2026-05-23)
-
-
-### Bug Fixes
-
-* delete empty config object ([#202](https://github.com/mammadataei/cypress-vite/issues/202)) ([1406107](https://github.com/mammadataei/cypress-vite/commit/1406107408366b1cb31c7d421efe5f246976711f))
-
 ## [1.10.0](https://github.com/mammadataei/cypress-vite/compare/v1.9.1...v1.10.0) (2026-05-05)
 
 
