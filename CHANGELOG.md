@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.2](https://github.com/mammadataei/cypress-vite/compare/v1.11.1...v1.11.2) (2026-05-26)
+
+
+### Bug Fixes
+
+* revert changelog ([1f049d7](https://github.com/mammadataei/cypress-vite/commit/1f049d7764fba8051694ac5b4d64ed16e333b0e1))
+
 ## [1.10.0](https://github.com/mammadataei/cypress-vite/compare/v1.9.1...v1.10.0) (2026-05-05)
 
 
