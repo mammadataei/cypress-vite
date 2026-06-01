@@ -146,7 +146,7 @@ jobs:
           steps.versions.outputs.debug }}
 
       - name: Run Tests
-        uses: cypress-io/github-action@v7.3.0
+        uses: cypress-io/github-action@v7.4.0
         with:
           install: false
           build: pnpm build
