@@ -69,5 +69,5 @@
     "unbuild": "^3.6.1",
     "vite": "^8.0.12"
   },
-  "packageManager": "pnpm@9.15.9"
+  "packageManager": "pnpm@11.6.0"
 }
