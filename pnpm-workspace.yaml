@@ -1,2 +1,5 @@
 packages:
   - example
+allowBuilds:
+  cypress: true
+  esbuild: true
