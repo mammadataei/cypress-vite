@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [1.11.2](https://github.com/mammadataei/cypress-vite/compare/v1.11.1...v1.11.2) (2026-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to v19 ([#192](https://github.com/mammadataei/cypress-vite/issues/192)) ([9ca6f3a](https://github.com/mammadataei/cypress-vite/commit/9ca6f3a26cae8712d0a19f50c00e492216538293))
+
 ## [1.10.1](https://github.com/mammadataei/cypress-vite/compare/v1.10.0...v1.10.1) (2026-05-23)
 
 
