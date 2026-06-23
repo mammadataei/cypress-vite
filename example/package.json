@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5173",
-    "cypress": "start-server-and-test dev http://localhost:5173 'cypress open'",
-    "cypress-run-all": "cypress run && cypress run --config-file cypress-prebuild.config.ts",
-    "test": "start-server-and-test dev http://localhost:5173 cypress-run-all",
-    "test:ci": "pnpm cypress-run-all",
+    "cy:open": "start-server-and-test dev http://localhost:5173 'cypress open'",
+    "cy:run": "cypress run",
+    "cy:run:prebuild": "cypress run --config-file cypress-prebuild.config.ts",
+    "cy:run:prebuild:single": "cypress run --config-file cypress-prebuild.config.ts --spec 'cypress/tests/App.e2e.ts'",
+    "cy:run:all": "pnpm cy:run && pnpm cy:run:prebuild && pnpm cy:run:prebuild:single",
+    "test": "start-server-and-test dev http://localhost:5173 'cy:run:all'",
+    "test:ci": "pnpm cy:run:all",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
