@@ -1,14 +1,7 @@
-import { fileURLToPath } from 'url'
-import { resolve, dirname } from 'path'
 import { defineConfig } from 'cypress'
 import { getVitePrebuilder } from 'cypress-vite'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const { vitePrebuild, vitePreprocessor } = getVitePrebuilder(
-  resolve(__dirname, './vite.config.ts'),
-)
+const { vitePrebuild, vitePreprocessor } = getVitePrebuilder({})
 
 export default defineConfig({
   e2e: {
