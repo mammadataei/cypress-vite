@@ -17,9 +17,9 @@
     "jsx": "react-jsx",
     "paths": {
       "@src/*": ["./src/*"],
-      "@tests/*": ["./tests/*"]
+      "@tests/*": ["./cypress/tests/*"]
     }
   },
-  "include": ["src", "tests"],
+  "include": ["src", "cypress/tests"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
