@@ -47,20 +47,17 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
     details: Cypress.BeforeRunDetails,
     cypressConfig: Cypress.PluginConfigOptions,
   ) {
+    const files: string[] = details.specs?.map((spec) => spec.absolute) || []
+    if (cypressConfig.supportFile) {
+      files.push(cypressConfig.supportFile)
+    }
+
     // TODO: there may be a way to get it to work for watch mode... Could we watch the file while keeping imported assets?
-    if (
-      cypressConfig.watchForFileChanges ||
-      !details.specs ||
-      details.specs.length < 2
-    ) {
+    if (cypressConfig.watchForFileChanges || files.length < 2) {
       // We don't gain anything from pre-preprocessing if there isn't more than 1 spec being ran.
       wasPrebuilt = false
       debug('Not pre-building with Vite.')
       return
-    }
-    const files: string[] = details.specs.map((spec) => spec.absolute)
-    if (cypressConfig.supportFile) {
-      files.push(cypressConfig.supportFile)
     }
 
     debug(`Pre-building ${files.length} files with Vite.`)
