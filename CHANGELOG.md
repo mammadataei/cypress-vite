@@ -1,6 +1,15 @@
 # Changelog
 
 
+## [1.10.2](https://github.com/mammadataei/cypress-vite/compare/v1.11.1...v1.10.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* single entry error when using preBuild ([#228](https://github.com/mammadataei/cypress-vite/issues/228)) ([6bda890](https://github.com/mammadataei/cypress-vite/commit/6bda89046a5f0b4ff5a5541b43363c5f99afef60))
+
+
+
 ## [1.10.1](https://github.com/mammadataei/cypress-vite/compare/v1.10.0...v1.10.1) (2026-05-23)
 
 
