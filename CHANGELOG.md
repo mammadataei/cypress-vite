@@ -1,6 +1,19 @@
 # Changelog
 
 
+## [1.10.2](https://github.com/mammadataei/cypress-vite/compare/v1.11.1...v1.10.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to v19 ([#192](https://github.com/mammadataei/cypress-vite/issues/192)) ([9ca6f3a](https://github.com/mammadataei/cypress-vite/commit/9ca6f3a26cae8712d0a19f50c00e492216538293))
+* single entry error when using preBuild ([#228](https://github.com/mammadataei/cypress-vite/issues/228)) ([6bda890](https://github.com/mammadataei/cypress-vite/commit/6bda89046a5f0b4ff5a5541b43363c5f99afef60))
+
+
+### Miscellaneous Chores
+
+* release 1.10.2 ([8fb53d9](https://github.com/mammadataei/cypress-vite/commit/8fb53d9965efa584f20558f1cd7e82ecd8f84483))
+
 ## [1.10.1](https://github.com/mammadataei/cypress-vite/compare/v1.10.0...v1.10.1) (2026-05-23)
 
 
