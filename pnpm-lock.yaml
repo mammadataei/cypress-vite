@@ -31,7 +31,7 @@ importers:
         version: 5.0.0
       cypress:
         specifier: ^15.18.0
-        version: 15.18.0
+        version: 15.18.1
       debug:
         specifier: ^4.4.3
         version: 4.4.3(supports-color@8.1.1)
@@ -83,7 +83,7 @@ importers:
         version: 8.0.2
       '@testing-library/cypress':
         specifier: ^10.1.3
-        version: 10.1.3(cypress@15.18.0)
+        version: 10.1.3(cypress@15.18.1)
       '@types/react':
         specifier: ^19.2.17
         version: 19.2.17
@@ -98,7 +98,7 @@ importers:
         version: 10.5.2(postcss@8.5.16)
       cypress:
         specifier: ^15.18.0
-        version: 15.18.0
+        version: 15.18.1
       cypress-vite:
         specifier: workspace:^
         version: link:..
@@ -1281,8 +1281,8 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  cypress@15.18.0:
-    resolution: {integrity: sha512-aLfOYSLlVt1b6QSoVUjbCY27taZlYAT8ST47xQbwd9pvQrY/g5gXi12yItZTB+kxkkj+ZcvUYmRLUC95SlCJsw==}
+  cypress@15.18.1:
+    resolution: {integrity: sha512-JtkTVtUE2lvLYgZCaug+Uai0H9IqsJirlBO49c87QwG0bJUGvAUVBz1EJve0b0oaYP244Ew9M0BkrHpcqkYxmw==}
     engines: {node: ^20.1.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
 
@@ -2619,6 +2619,10 @@ packages:
     resolution: {integrity: sha512-IIaP0g3iy9Cyy18w3M9YcaDudujEAVHKt3a3QJg1+sr/oX96TbaGUubG0hJyCjCBThFH+tFpcIyoUHUn1ogaLA==}
     engines: {node: '>=20'}
 
+  string-width@8.2.2:
+    resolution: {integrity: sha512-GaPUh5gfdrYzqeVNZvUfT23vYYxXzKYidUcnMtJg/3rxRV63EFZy3k6xfKlmfeJD0176lnUV/Usr3XcwSvFzpg==}
+    engines: {node: '>=20'}
+
   strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
@@ -2659,8 +2663,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  systeminformation@5.31.11:
-    resolution: {integrity: sha512-I6O7iaUj23AXRgCPDDnvi3xHvdOLp4+1YMbF+X194lJwY1NeWojgHJPhslVKcmTtrLTguRk3QJK+xEdTiI3P0w==}
+  systeminformation@5.31.16:
+    resolution: {integrity: sha512-37NsFaeaqwYxanLgdJAGWj8OXIRgvSBsDXGhlC0uUoHyl9nf4HrNsZjqtQ9Gc99bj9FQpffzYccPVuQ6gpjfqg==}
     engines: {node: '>=8.0.0'}
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
@@ -3448,11 +3452,11 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@testing-library/cypress@10.1.3(cypress@15.18.0)':
+  '@testing-library/cypress@10.1.3(cypress@15.18.1)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@testing-library/dom': 10.4.1
-      cypress: 15.18.0
+      cypress: 15.18.1
 
   '@testing-library/dom@10.4.1':
     dependencies:
@@ -3802,7 +3806,7 @@ snapshots:
   cli-truncate@5.2.0:
     dependencies:
       slice-ansi: 8.0.0
-      string-width: 8.2.1
+      string-width: 8.2.2
 
   cliui@9.0.1:
     dependencies:
@@ -3961,7 +3965,7 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  cypress@15.18.0:
+  cypress@15.18.1:
     dependencies:
       '@cypress/request': 4.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
@@ -3996,7 +4000,7 @@ snapshots:
       proxy-from-env: 1.0.0
       request-progress: 3.0.0
       supports-color: 8.1.1
-      systeminformation: 5.31.11
+      systeminformation: 5.31.16
       tmp: 0.2.7
       tree-kill: 1.2.2
       tslib: 1.14.1
@@ -5309,6 +5313,11 @@ snapshots:
       get-east-asian-width: 1.6.0
       strip-ansi: 7.2.0
 
+  string-width@8.2.2:
+    dependencies:
+      get-east-asian-width: 1.6.0
+      strip-ansi: 7.2.0
+
   strip-ansi@6.0.1:
     dependencies:
       ansi-regex: 5.0.1
@@ -5355,7 +5364,7 @@ snapshots:
       picocolors: 1.1.1
       sax: 1.6.0
 
-  systeminformation@5.31.11: {}
+  systeminformation@5.31.16: {}
 
   tailwindcss@3.4.19(yaml@2.9.0):
     dependencies:
