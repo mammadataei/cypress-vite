@@ -65,7 +65,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "prettier": "^3.9.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.0",
     "unbuild": "^3.6.1",
     "vite": "^8.1.0"
   },
