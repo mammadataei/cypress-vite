@@ -4,6 +4,22 @@ import baseVitePreprocessor from './vitePreprocessor'
 import { debug, getConfig } from './common'
 
 let wasPrebuilt = true
+let prebuildRoot = ''
+
+/**
+ * Rollup `[name]` for a spec, relative to the Cypress/project root.
+ * Using `path.basename` here collides when two specs share a filename.
+ */
+function getPrebuildEntryName(filePath: string, root: string): string {
+  const relative = path.relative(root, filePath)
+  const posix = relative.split(path.sep).join('/')
+  const { dir, name } = path.posix.parse(posix)
+  return path.posix.join(dir, name)
+}
+
+function getPrebuildOutputPath(filePath: string, root: string, outDir: string) {
+  return path.join(outDir, `${getPrebuildEntryName(filePath, root)}.ts`)
+}
 
 /**
  * Pre-process all files at the beginning of the test run, before they are ran through the
@@ -62,6 +78,14 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
 
     debug(`Pre-building ${files.length} files with Vite.`)
 
+    prebuildRoot = cypressConfig.projectRoot || process.cwd()
+    const input = Object.fromEntries(
+      files.map((filePath) => [
+        getPrebuildEntryName(filePath, prebuildRoot),
+        filePath,
+      ]),
+    )
+
     const resolvedConfig: InlineConfig = mergeConfig(config, {
       // overrides
       build: {
@@ -69,7 +93,7 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
         emptyOutDir: true,
         minify: false,
         rollupOptions: {
-          input: files,
+          input,
           output: { entryFileNames: '[name].ts', format: 'es' },
           treeshake: true,
         },
@@ -82,7 +106,8 @@ export function getVitePrebuilder(userConfig?: InlineConfig | string) {
 
   function customVitePreprocessor(file: Cypress.FileObject) {
     if (wasPrebuilt && !file.shouldWatch) {
-      file.filePath = path.join(OUT_DIR, path.basename(file.filePath))
+      const root = prebuildRoot || process.cwd()
+      file.filePath = getPrebuildOutputPath(file.filePath, root, OUT_DIR)
     }
 
     // TODO: make so initial preprocess works, don't have to re-preprocess here
