@@ -34,6 +34,7 @@
     "build": "unbuild",
     "example": "pnpm --filter example",
     "test": "pnpm --filter example test",
+    "test:unit": "node --experimental-strip-types --test test/prebuild-unique-spec-paths.test.mts",
     "format": "prettier --write . && pnpm lint --fix",
     "lint": "eslint . ",
     "check": "tsc && pnpm lint && prettier --check .",
